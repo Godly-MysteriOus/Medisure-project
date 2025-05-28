@@ -11,10 +11,10 @@
     place-items: center;
 }
 .errorImageContainer img{
-    width: 40%;
+    width: 35rem;
 }
 .navigateToHomePage{
-    margin-top: 3rem;
+    margin-top: 1rem;
     display: grid;
     place-items: center;
     min-height: 5rem;

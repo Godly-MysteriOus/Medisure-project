@@ -5,8 +5,8 @@ const cors = require('cors');
 const path = require('path');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const csrfProtection = require(path.join(__dirname,'middleware','CSRF','csrfProtection.js'));
-const connection = require(path.join(__dirname,'DB_Utils','DB_Connection'));
+const csrfProtection = require('./middleware/CSRF/csrfProtection');
+const connection = require('./DB_Utils/DB_Connection');
 const logger = require('./utils/Logger/logger');
 const app = express();
 //setting up UI Engine and pickup files

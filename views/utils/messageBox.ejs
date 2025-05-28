@@ -1,0 +1,27 @@
+<style>
+    .messageBoxContainer{
+        position: absolute;
+        top: 0.5rem;
+        left: 0;
+        display: grid;
+        place-items: center;
+        width: 100%;
+    }
+    .messageContainer{
+        text-align: center;
+        width: fit-content;
+        background-color: rgba(240, 248, 255, 0.588);
+        padding: 0.3rem 1rem;
+        border-radius: 0.3rem;
+    }
+    .messageHidden{
+        display: none;
+    }
+</style>
+
+<div class="messageBoxContainer">
+    <div class="messageContainer messageHidden"><%= message %></div>
+</div>
+<script>
+    const  message = document.querySelector('.messageContainer');
+</script>

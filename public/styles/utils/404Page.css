@@ -1,0 +1,35 @@
+.a404Body{
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: whitesmoke;
+}
+.errorImageContainer{
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+.errorImageContainer img{
+    width: 40%;
+}
+.navigateToHomePage{
+    margin-top: 3rem;
+    display: grid;
+    place-items: center;
+    min-height: 5rem;
+}
+.homePageButtonHolder{
+    height: 3rem;
+    display: grid;
+    place-items: center;
+}
+
+.homePageButton {
+    color: whitesmoke;
+    transition: all 0.6s ease-in-out;
+}
+.homePageButton:hover{
+    font-weight: 500;
+    zoom: 1.05;
+}

@@ -1,0 +1,25 @@
+<%- include('./utils/start.ejs') %>
+<link rel="stylesheet" href="/styles/utils/404Page.css">
+</head>
+    <body class="a404Body">
+        <%- include('./utils/variables.ejs') %>
+        <div class="errorImageContainer">
+            <img src="/images/404Error.png" alt="404 Error image">
+            <div class="navigateToHomePage montserrat">
+                Go Back To Home Page
+                <div class="homePageButtonHolder">
+                    <button class="button-1 homePageButton montserrat">Click Here</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    const backToHomePageButton = document.querySelector('.homePageButton');
+    backToHomePageButton.addEventListener('click',(e)=>{
+        window.location.href = url+errorPageRedirection;
+    });
+
+</script>
+

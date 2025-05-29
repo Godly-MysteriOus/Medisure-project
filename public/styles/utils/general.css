@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     position: relative;
 }
-html{
+html,body{
     width: 100%;
     height: 100%;
     border: 2px solid red;
+    overflow: hidden;
 }
 
 .montserrat {
@@ -16,4 +17,22 @@ html{
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+}
+
+.rowdies-light {
+    font-family: "Rowdies", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.rowdies-regular {
+    font-family: "Rowdies", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.rowdies-bold {
+font-family: "Rowdies", sans-serif;
+font-weight: 700;
+font-style: normal;
 }

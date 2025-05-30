@@ -1,0 +1,176 @@
+footer{
+    width: 100%;
+    min-height: 35vh;
+    background-color: black;
+    padding: 1.5rem 0rem;
+    color: white;
+}
+.heartIcon{
+    width: 1.5rem;
+    padding: 0rem 0.15rem;
+}
+.footerMessage{
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+}
+.createdMessage{
+    display: flex;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+.footerNavigationItems{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 1rem;
+    flex: 1;
+    padding: 0.5rem 2rem;
+    margin-top: 2rem;
+}
+.footerNavigationItems section{
+    flex-grow: 1;
+    min-width: 8rem;
+}
+section div{
+    padding: 0.8rem 0.5rem 0rem 0rem;
+    border-bottom: 1px solid white;
+    font-size: 0.75rem;
+    width: fit-content;
+    cursor: pointer;
+}
+.heading{
+    font-size: 0.9rem;
+    border: none;
+    cursor: default;
+}
+.newsLetterSubscription{
+    width: 100%;
+    display: grid;
+    place-items: center;
+    font-size: 0.8rem;
+    gap: 1rem;
+    margin-top: 3rem;
+
+}
+.inputFieldHolder{
+    display: flex;
+    width: 25rem;
+    justify-content: space-evenly;
+}
+.newsLetterEmail{
+    width: 70%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.197);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    border-radius: 0.25rem;
+    color: white;
+    border: none;
+}
+.subscribeToNewsLetterButton{
+    color: white;
+}
+.newsLetterEmail:active,.newsLetterEmail:focus{
+    border: none;
+}
+@media screen and (min-width:701px) and (max-width:1200px) {
+    .footerMessage,.createdMessage,.footerNavigationItems section div,.newsLetterSubscription{
+        font-size: 0.8rem;
+    }
+    .heading{
+        font-size: 0.9rem;
+    }
+    .footerNavigationItems{
+        padding: 1rem;
+    }
+    .footerNavigationItems section{
+        min-width: 4rem;
+    }
+    section div{
+        padding: 0.25rem 0.5rem 0rem 0rem;
+    }
+    .inputFieldHolder{
+        max-width: max(23rem,35%);
+    }
+    .newsLetterEmail{
+        padding: 0.15rem 0.2rem;
+        width: 13rem
+    }
+    .inputFieldHolder{
+        width: 100%;
+    }
+    .button-1{
+        padding: 0.15rem 0.5rem;
+        font-size: 0.6rem;
+    }
+    .heartIcon{
+        width: 1.3rem;
+    }
+}
+@media screen and (min-width:301px) and (max-width:700px) {
+    .footerMessage,.createdMessage,.footerNavigationItems section div,.newsLetterSubscription{
+        font-size: 0.65rem;
+    }
+    .heading{
+        font-size: 0.8rem;
+    }
+    .footerNavigationItems{
+        padding: 1rem;
+    }
+    .footerNavigationItems section{
+        min-width: 4rem;
+    }
+    section div{
+        padding: 0.25rem 0.5rem 0rem 0rem;
+    }
+    .inputFieldHolder{
+        max-width: max(18rem,35%);
+    }
+    .newsLetterEmail{
+        padding: 0.15rem 0.2rem;
+        width: 13rem
+    }
+    .inputFieldHolder{
+        width: 100%;
+    }
+    .button-1{
+        padding: 0.15rem 0.5rem;
+        font-size: 0.6rem;
+    }
+    .heartIcon{
+        width: 1.1rem;
+    }
+}
+@media screen and (max-width:300px) {
+    .footerMessage,.createdMessage,.footerNavigationItems section div,.newsLetterSubscription{
+        font-size: 0.6rem;
+    }
+    .heading{
+        font-size: 0.7rem;
+    }
+    .footerNavigationItems{
+        padding: 1rem;
+    }
+    .footerNavigationItems section{
+        min-width: 4rem;
+    }
+    section div{
+        padding: 0.25rem 0.5rem 0rem 0rem;
+    }
+    .newsLetterEmail{
+        padding: 0.15rem 0.2rem;
+        width: 65%;
+    }
+    .inputFieldHolder{
+        width: 100%;
+    }
+    .button-1{
+        padding: 0.15rem 0.2rem;
+        font-size: 0.6rem;
+    }
+    .heartIcon{
+        width: 1rem;
+    }
+}

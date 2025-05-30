@@ -7,8 +7,10 @@
         /* display: grid; */
     }
     .headerHolder{
-        height: 8.4%;
+        height: 8%;
         width: 100%;
+        display: flex;
+        align-items: center;
         /* background-color: #89253e; */
         background: #3a6186;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to right, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
@@ -16,7 +18,7 @@
     }
     .mainBody{
         width: 100%;
-        height: calc(100% - 8.4%);
+        height: calc(100% - 17%);
         overflow-y:scroll ;
     }
     .footerHolder{
@@ -26,15 +28,23 @@
     .mainBody::-webkit-scrollbar {
         display: none;
     }
+    .footer{
+        background-color: #d1d1d1;
+        height: 9%;
+        width: 100%;
+    }
 </style>
 </head>
     <body class="homePage">
         <%- include('../utils/variablesAndMessageBox') %>
         <div class="headerHolder">
-            <%- include('../utils/preLoginHeader.ejs') %>
+            <%- include('../utils/customerHeader.ejs') %>
         </div>
         <div class="mainBody">Hi
-            <div class="footerHolder"><%- include('../utils/preLoginFooter.ejs') %></div>
+            <div class="footerHolder"><%- include('../utils/homePageFooter.ejs') %></div>
+        </div>
+        <div class="footer">
+            <%- include('../utils/customerFooter.ejs') %>
         </div>
     </body>
 </html>

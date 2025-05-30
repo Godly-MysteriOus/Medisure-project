@@ -18,6 +18,7 @@
     display: grid;
     place-items: center;
     min-height: 5rem;
+    text-align: center;
 }
 .homePageButtonHolder{
     height: 3rem;

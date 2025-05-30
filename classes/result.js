@@ -6,7 +6,7 @@ const result = class Result{
         this.message = '';
     }
     setSuccess(val){
-        this.result = val;
+        this.success = val;
     }
     setMessage(message){
         this.message = message;

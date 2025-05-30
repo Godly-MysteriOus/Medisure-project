@@ -1,0 +1,16 @@
+<%- include('./utils/start.ejs') %>
+<link rel="stylesheet" href="/styles/utils/429Page.css">
+</head>
+<body class="error429">
+    <%- include('./utils/variablesAndMessageBox.ejs',{message:''}) %>
+    <div class="errorImage">
+        <img src="/images/429Error.png" alt="429 Error Image">
+        <div class="errorMessageHolder montserrat">
+            Too Many Requests. <br><br>
+            Our system has detected unusually high activity from your side. Please slow down and try again in a few moments.
+            <br><br> <i class="italicText">We appreciate your patience. If this keeps happening, contact support.</i>
+            <br><br>
+            <button class="contactUsButton button-1">Contact Us</button>
+        </div>
+    </div>
+</body>

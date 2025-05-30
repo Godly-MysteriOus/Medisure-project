@@ -94,6 +94,12 @@ app.use('/common',commonRoute);
 app.get('/',(req,res,next)=>{
     res.render('preLogin/home');
 });
+app.get('/a',(req,res,next)=>{
+    res.render('500Page');
+});
+app.get('/b',(req,res,next)=>{
+    res.render('429Page');
+})
 app.use((req,res,next)=>{
     res.status(404).render('404Page');
 });

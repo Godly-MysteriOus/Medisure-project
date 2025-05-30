@@ -6,6 +6,7 @@
         display: grid;
         place-items: center;
         width: 100%;
+        z-index: 100;
     }
     .messageContainer{
         text-align: center;
@@ -20,7 +21,7 @@
 </style>
 
 <div class="messageBoxContainer">
-    <div class="messageContainer messageHidden"><%= message %></div>
+    <div class="messageContainer messageHidden"></div>
 </div>
 <script>
     const  message = document.querySelector('.messageContainer');

@@ -16,7 +16,7 @@ fs.writeFileSync(logFilePath, "");
 
 // Logger Configuration
 const logger = createLogger({
-    level: "info",
+    level: "silly",
     format: format.combine(
         format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
         format.printf(({ timestamp, level, message }) => `${timestamp} [${level.toUpperCase()}]: ${message}`)

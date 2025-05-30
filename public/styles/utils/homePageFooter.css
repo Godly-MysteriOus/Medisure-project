@@ -1,7 +1,12 @@
 footer{
     width: 100%;
     min-height: 35vh;
-    background-color: black;
+    /* background-color: black; */
+    /* background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); */
+    background: #3a6186;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #89253e, #18576e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     padding: 1.5rem 0rem;
     color: white;
 }
@@ -35,7 +40,7 @@ footer{
 }
 section div{
     padding: 0.8rem 0.5rem 0rem 0rem;
-    border-bottom: 1px solid white;
+    /* border-bottom: 1px solid white; */
     font-size: 0.75rem;
     width: fit-content;
     cursor: pointer;
@@ -59,21 +64,28 @@ section div{
     width: 25rem;
     justify-content: space-evenly;
 }
+input{
+    border: none;
+    border: 1px solid black;
+}
 .newsLetterEmail{
     width: 70%;
-    border: none;
+    border: 1px solid black;
     background-color: rgba(255, 255, 255, 0.197);
     padding: 0.25rem 0.5rem;
     font-size: 0.85rem;
     border-radius: 0.25rem;
     color: white;
-    border: none;
 }
 .subscribeToNewsLetterButton{
     color: white;
 }
 .newsLetterEmail:active,.newsLetterEmail:focus{
-    border: none;
+    border: 1px solid black;
+}
+.footer-nav-item a{
+    color: white;
+    text-decoration: none;
 }
 @media screen and (min-width:701px) and (max-width:1200px) {
     .footerMessage,.createdMessage,.footerNavigationItems section div,.newsLetterSubscription{
@@ -89,7 +101,7 @@ section div{
         min-width: 4rem;
     }
     section div{
-        padding: 0.25rem 0.5rem 0rem 0rem;
+        padding: 0.8rem 0.5rem 0rem 0rem;
     }
     .inputFieldHolder{
         max-width: max(23rem,35%);
@@ -123,7 +135,7 @@ section div{
         min-width: 4rem;
     }
     section div{
-        padding: 0.25rem 0.5rem 0rem 0rem;
+        padding: 0.6rem 0.5rem 0rem 0rem;
     }
     .inputFieldHolder{
         max-width: max(18rem,35%);
@@ -157,7 +169,7 @@ section div{
         min-width: 4rem;
     }
     section div{
-        padding: 0.25rem 0.5rem 0rem 0rem;
+        padding: 0.4rem 0.5rem 0rem 0rem;
     }
     .newsLetterEmail{
         padding: 0.15rem 0.2rem;

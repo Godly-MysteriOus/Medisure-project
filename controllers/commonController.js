@@ -4,10 +4,13 @@ const logger = require('../utils/Logger/logger');
 const newsLetterDB = require('../models/newsLetter');
 const userQueriesDB = require('../models/userQueries');
 const mongoose = require('mongoose');
-exports.postSubscriptionToNewsLetter = async(req,res,next)=>{
+const Result = require('../classes/result');
+
+exports.postSubscriptionToNewsLetter = async(req,res,next)=>{ 
+    const result = new Result();
     logger.info('Inside postSubscriptionToNewsLetter method!!!');
     const error = validationResult(req);
-    const {emailId} = req.body;
+    const {email} = req.body;
     if(!error.isEmpty()){
         logger.debug('Errors found while validating inputs.');
         return res.status(400).json({
@@ -18,27 +21,32 @@ exports.postSubscriptionToNewsLetter = async(req,res,next)=>{
     const transactionSession = await mongoose.startSession();
     try{
         transactionSession.startTransaction();
-        const isAlreadySubscribed = await newsLetterDB.findOne({emailId:emailId});
+        const isAlreadySubscribed = await newsLetterDB.findOne({emailId:email});
         if(isAlreadySubscribed){
             logger.debug('Email Id already in subscription list');
-            throw new Error('Already Subscribed');
-        }
-        const saveForSubscription = await newsLetterDB.create([{emailId:emailId}],{session:transactionSession});
-        if(!saveForSubscription){
-            logger.debug('Error creating entry to the database for news Letter subscription');
-            throw new Error('Error subscribing to news letter');
+            result.setSuccess(false);
+            result.setMessage('Already Subscribed');
+        }else{
+            const saveForSubscription = await newsLetterDB.create([{emailId:email}],{session:transactionSession});
+            if(!saveForSubscription){
+                logger.debug('Error creating entry to the database for news Letter subscription');
+                throw new Error('Error subscribing to news letter');
+            }else{
+                result.setSuccess(true);
+                result.setMessage('Successfully Subscribed.');
+            }
         }
         await transactionSession.commitTransaction();
         await transactionSession.endSession();
         return res.status(200).json({
-            success:true,
-            message:'Successfully Subscribed.',
+            success:result.getSuccess(),
+            message:result.getMessage(),
         });
     }catch(e){
         transactionSession.abortTransaction();
         transactionSession.endSession();
         let message = '';
-        if(e.message=='Already Subscribed' || e.message=='Error subscribing to news letter'){
+        if(e.message=='Error subscribing to news letter'){
             message = e.message;
         }else{
             message = 'Error occoured, please try again!';

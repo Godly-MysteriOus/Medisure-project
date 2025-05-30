@@ -7,12 +7,16 @@
         /* display: grid; */
     }
     .headerHolder{
-        height: 10%;
+        height: 8.4%;
         width: 100%;
+        /* background-color: #89253e; */
+        background: #3a6186;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #89253e,#89253e, #18576e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     .mainBody{
         width: 100%;
-        height: calc(100% - 10%);
+        height: calc(100% - 8.4%);
         overflow-y:scroll ;
     }
     .footerHolder{
@@ -25,7 +29,7 @@
 </style>
 </head>
     <body class="homePage">
-        <%- include('../utils/variablesAndMessageBox',{message:''}) %>
+        <%- include('../utils/variablesAndMessageBox') %>
         <div class="headerHolder">
             <%- include('../utils/preLoginHeader.ejs') %>
         </div>

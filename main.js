@@ -87,14 +87,15 @@ app.get('/csrf-token',csrfProtection,(req,res,next)=>{
 // const sellerRoute = require('./routes/sellerRoute');
 // const customerRoute = require('./routes/customerRoute');
 const commonRoute = require('./routes/commonRoute');
+const generalRoute = require('./routes/generalRoute');
 // app.use('/signup',signupAuthRoute);
 // app.use('/customer',customerRoute);
 // app.use('/seller',sellerRoute);
 app.use('/common',commonRoute);
+app.use(generalRoute);
 
-app.get('/',(req,res,next)=>{
-    res.render('preLogin/home');
-});
+// general routes
+
 app.use((req,res,next)=>{
     res.status(404).render('404Page');
 });

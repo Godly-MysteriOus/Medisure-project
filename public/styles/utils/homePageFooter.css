@@ -126,7 +126,7 @@ input{
         font-size: 0.65rem;
     }
     .footerMessage{
-        padding: 0.5rem 0.5rem;
+        padding: 0.5rem 0.2rem;
     }
     .heading{
         font-size: 0.8rem;
@@ -163,7 +163,7 @@ input{
         font-size: 0.6rem;
     }
     .footerMessage{
-        padding: 0.5rem 0.25rem;
+        padding: 0.5rem 0.2rem;
     }
     .heading{
         font-size: 0.7rem;

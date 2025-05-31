@@ -25,9 +25,15 @@ subscribeToNewsLetterButton.addEventListener('click',async(e)=>{
             email : customerEmail.value,
         }),
     });
-    const response = await request.json();
-    messageDisplayAndHide(response.message);
-    if(response.success){
-        customerEmail.setAttribute('disabled',true);
+    if(request.status==429){
+        window.location.href = url+'429Error';
+    }else{
+        const response = await request.json();
+        console.log(response);
+        messageDisplayAndHide(response.message);
+        if(response.success){
+            customerEmail.setAttribute('disabled',true);
+            customerEmail.value = '';
+        }
     }
 });

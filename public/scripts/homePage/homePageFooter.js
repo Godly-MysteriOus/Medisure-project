@@ -29,7 +29,6 @@ subscribeToNewsLetterButton.addEventListener('click',async(e)=>{
         window.location.href = url+'429Error';
     }else{
         const response = await request.json();
-        console.log(response);
         messageDisplayAndHide(response.message);
         if(response.success){
             customerEmail.setAttribute('disabled',true);

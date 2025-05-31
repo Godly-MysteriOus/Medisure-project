@@ -1,24 +1,55 @@
-<style>
-    .companyNameAndLogo{
-        display: flex;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        font-size: 1.25rem;
-        gap: 0.25rem;
-        color: white;
-    }
-    .companyLogo{
-        display: grid;
-        place-items: center;
-    }
-    .companyLogo img{
-        width: 2rem;
-    }
-</style>
+<div class="header">
     <div class="companyNameAndLogo">
         <div class="companyLogo">
             <img src="/images/company-logo-2.png" alt="Company Logo">
         </div>
         <div class="companyName rowdies-regular">Medisure</div>
     </div>
+
+    <div class="navigationBarWrapper">
+        <div class="navigationItemsWrapper">
+            <div class="mobileCenterNavItemWrapper">
+                <% if (isLoggedIn) { %>
+                    <div class="logoutButtonHolder"><button class="logoutButton button-3">Logout</button></div>
+                <% }else{ %>
+                    <div class="signupButtonHolder"><button class="signupButton button-3">Signup</button></div>
+                    <div class="loginButtonHolder"><button class="loginButton button-3">Login</button></div>
+                <% } %>
+                <div class="notification"><span class="hideNotificationName">Notification</span><img src="/images/notification.png" alt="" class="hideNotificationIcon"></div>
+            </div>
+        </div>
+        <div class="sliderButtonHolder mobileViewButton">
+            <div class="menuBtnHolder"><img src="/images/menu.png" alt=""></div>
+            <div class="closeBtnHolder alternateActive"><img src="/images/close.png" alt=""></div>
+        </div>
+    </div>
+
+</div>
     
+<script>
+    const sliderButtonHolder = document.querySelector('.sliderButtonHolder');
+    const menuBtnHolder = document.querySelector('.menuBtnHolder');
+    const closeBtnHolder = document.querySelector('.closeBtnHolder');
+    const alternateActive = 'alternateActive';
+    const showOnClick = 'showOnClick';
+    const navigationItemsWrapper = document.querySelector('.navigationItemsWrapper');
+    sliderButtonHolder.addEventListener('click',()=>{
+        menuBtnHolder.classList.toggle(alternateActive);
+        closeBtnHolder.classList.toggle(alternateActive);
+        if(menuBtnHolder.classList.contains(alternateActive)){
+            navigationItemsWrapper.classList.add(showOnClick);
+        }else{
+            navigationItemsWrapper.classList.remove(showOnClick);
+        }
+    });
+    // this only handles closing for sidebar when not clicked on it
+    document.querySelector('body').addEventListener('click',(e)=>{
+        console.log('HI');
+        console.log(!e.target.closest('.navigationBarWrapper'));
+        if(!e.target.closest('.navigationBarWrapper')){
+            menuBtnHolder.classList.remove(alternateActive);
+            closeBtnHolder.classList.add(alternateActive);
+            navigationItemsWrapper.classList.remove(showOnClick);
+        }
+    })
+</script>

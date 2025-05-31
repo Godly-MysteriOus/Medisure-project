@@ -6,8 +6,6 @@
 .headerHolder{
     height: 8%;
     width: 100%;
-    display: flex;
-    align-items: center;
     /* background-color: #89253e; */
     background: #3a6186;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
@@ -19,7 +17,7 @@
     overflow-y:scroll ;
     border-bottom: 1px solid black;
 }
-.footerHolder{
+.homePageFooterHolder{
     width: 100%;
     height: fit-content;
 }
@@ -30,17 +28,23 @@
     background-color: #d1d1d1;
     height: 9%;
     width: 100%;
+    overflow: hidden;
 }
 /* header height always remains 8% */
 @media screen and (min-width:701px) and (max-width:1200px) {
-    
+    .footer{
+        height: 8%;
+    }
+    .mainBody{
+        height: calc(100% - 16%);
+    }
 }
 @media screen and (min-width:301px) and (max-width:700px) {
     .footer{
-        height: 7.5%;
+        height: 6.75%;
     }
     .mainBody{
-        height: calc(100% - 15.5%);
+        height: calc(100% - 14.75%);
     }
 }
 @media screen and (max-width:300px) {

@@ -7,3 +7,11 @@
     <link rel="shortcut icon" href="/images/medicine.png" type="image/x-icon">
     <link rel="stylesheet" href="/styles/utils/general.css">
     <link rel="stylesheet" href="/styles/utils/buttons.css">
+    <link rel="stylesheet" href="/styles/utils/messageBox.css">
+    <% if (headerType == 'customer') { %>
+        <link rel="stylesheet" href="/styles/utils/customerHeader.css">
+        <link rel="stylesheet" href="/styles/utils/customerFooter.css">
+    <% }else if(headerType=='seller'){ %>
+        <link rel="stylesheet" href="/styles/utils/sellerHeader.css">
+        <link rel="stylesheet" href="/styles/utils/sellerFooter.css">
+    <% } %>

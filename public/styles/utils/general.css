@@ -38,7 +38,7 @@ font-style: normal;
 
 
 /* provided a smooth slide border animation for home page footer items */
-.footer-nav-item::after {
+.footer-nav-item::after,.hideNotificationName::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -51,7 +51,7 @@ font-style: normal;
     transition: transform 0.4s ease-out;
 }
   
-.footer-nav-item:hover::after {
+.footer-nav-item:hover::after,.hideNotificationName:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }

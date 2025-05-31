@@ -1,14 +1,14 @@
-<%- include('../utils/start.ejs') %>
+<%- include('../utils/start.ejs',{headerType:'customer'}) %>
 <link rel="stylesheet" href="/styles/utils/homePageFooter.css">
 <link rel="stylesheet" href="/styles/customer/homePage.css">
 </head>
     <body class="homePage">
         <%- include('../utils/variablesAndMessageBox') %>
         <div class="headerHolder">
-            <%- include('../utils/customerHeader.ejs') %>
+            <%- include('../utils/customerHeader.ejs',{isLoggedIn:false}) %>
         </div>
-        <div class="mainBody">Hi
-            <div class="footerHolder"><%- include('../utils/homePageFooter.ejs') %></div>
+        <div class="mainBody">
+            <div class="homePageFooterHolder"><%- include('../utils/homePageFooter.ejs') %></div>
         </div>
         <div class="footer">
             <%- include('../utils/customerFooter.ejs') %>

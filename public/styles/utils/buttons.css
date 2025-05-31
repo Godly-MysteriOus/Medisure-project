@@ -15,3 +15,15 @@
     border-radius: 0.25rem;
     cursor: pointer;
 }
+
+.button-3{
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(245, 245, 245, 0.15);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    font-size: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.337);
+}

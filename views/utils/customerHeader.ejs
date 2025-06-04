@@ -1,55 +1,61 @@
 <div class="header">
-    <div class="companyNameAndLogo">
-        <div class="companyLogo">
-            <img src="/images/company-logo-2.png" alt="Company Logo">
-        </div>
+    <div class="companyLogoAndNameHolder">
+        <div class="companyLogo"><img src="/images/companyLogo.png" alt=""></div>
         <div class="companyName rowdies-regular">Medisure</div>
     </div>
-
-    <div class="navigationBarWrapper">
+    <div class="navigationBarWrapper hiddenMenu">
         <div class="navigationItemsWrapper">
-            <div class="mobileCenterNavItemWrapper">
-                <% if (isLoggedIn) { %>
-                    <div class="logoutButtonHolder"><button class="logoutButton button-3">Logout</button></div>
-                <% }else{ %>
-                    <div class="signupButtonHolder"><button class="signupButton button-3">Signup</button></div>
-                    <div class="loginButtonHolder"><button class="loginButton button-3">Login</button></div>
-                <% } %>
-                <div class="notification"><span class="hideNotificationName">Notification</span><img src="/images/notification.png" alt="" class="hideNotificationIcon"></div>
-            </div>
-        </div>
-        <div class="sliderButtonHolder mobileViewButton">
-            <div class="menuBtnHolder"><img src="/images/menu.png" alt=""></div>
-            <div class="closeBtnHolder alternateActive"><img src="/images/close.png" alt=""></div>
+            <% if (isLoggedIn) { %>
+                <!-- show this if user is logged in as per page -->
+             
+            <% }else{%>
+                <!-- show this if user is not lpgged in as per page -->
+                <% if (page=='customerHomePage') { %>
+                    <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
+                    <div class="navItem"><button class="signup button-3 montserrat">Signup</button></div>
+                <% }else if(page=='loginPage'){%>
+                    <div class="navitem montserrat">Home</div>
+                    <div class="navItem"><button class="signup button-3 montserrat">Signup</button></div>
+                <%}else if(page=="signupPage"){%>
+                    <div class="navitem">Home</div>
+                    <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
+                <%}%>
+                <div class="navItem"><button class="contactUsBtn button-3 montserrat">Contact Us</button></div>
+            <%}%>
         </div>
     </div>
-
+    <div class="mobileNavigationButton mobileViewOnly">
+        <div class="menuBtn"><img src="/images/menu.png" alt="hamburger menu icon"></div>
+        <div class="closeBtn hideAlternateButton"><img src="/images/close.png" alt="closeButton icon"></div>
+    </div>
 </div>
-    
+
 <script>
-    const sliderButtonHolder = document.querySelector('.sliderButtonHolder');
-    const menuBtnHolder = document.querySelector('.menuBtnHolder');
-    const closeBtnHolder = document.querySelector('.closeBtnHolder');
-    const alternateActive = 'alternateActive';
-    const showOnClick = 'showOnClick';
-    const navigationItemsWrapper = document.querySelector('.navigationItemsWrapper');
-    sliderButtonHolder.addEventListener('click',()=>{
-        menuBtnHolder.classList.toggle(alternateActive);
-        closeBtnHolder.classList.toggle(alternateActive);
-        if(menuBtnHolder.classList.contains(alternateActive)){
-            navigationItemsWrapper.classList.add(showOnClick);
-        }else{
-            navigationItemsWrapper.classList.remove(showOnClick);
+    const mobileNavigationButton = document.querySelector('.mobileNavigationButton');
+    const menuBtn = document.querySelector('.menuBtn');
+    const closeBtn = document.querySelector('.closeBtn');
+    const hideAlternateButton = 'hideAlternateButton';
+    const navigationBarWrapper = document.querySelector('.navigationBarWrapper');
+    const hiddenMenu = 'hiddenMenu';
+
+    document.querySelector('body').addEventListener('click',(e)=>{
+        // on when you dont click on navigation bar and navigation button, the sidebar will fade away
+        if(e.target.closest('.navigationBarWrapper')==null && !e.target.closest('.mobileNavigationButton')){
+            // the sidebar will only fade when it is opened
+            if(menuBtn.classList.contains(hideAlternateButton)){
+                menuBtn.classList.toggle(hideAlternateButton);
+                closeBtn.classList.toggle(hideAlternateButton);
+                navigationBarWrapper.classList.add(hiddenMenu);
+            }
         }
     });
-    // this only handles closing for sidebar when not clicked on it
-    document.querySelector('body').addEventListener('click',(e)=>{
-        console.log('HI');
-        console.log(!e.target.closest('.navigationBarWrapper'));
-        if(!e.target.closest('.navigationBarWrapper')){
-            menuBtnHolder.classList.remove(alternateActive);
-            closeBtnHolder.classList.add(alternateActive);
-            navigationItemsWrapper.classList.remove(showOnClick);
+    mobileNavigationButton.addEventListener('click',()=>{
+        menuBtn.classList.toggle(hideAlternateButton);
+        if(menuBtn.classList.contains(hideAlternateButton)){
+            navigationBarWrapper.classList.remove(hiddenMenu);
+        }else{
+            navigationBarWrapper.classList.add(hiddenMenu);
         }
-    })
+        closeBtn.classList.toggle(hideAlternateButton);
+    });
 </script>

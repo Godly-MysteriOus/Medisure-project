@@ -1,154 +1,131 @@
 .header{
     width: 100%;
+    background: #3a6186;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #89253e, #18576e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    height: 98%;
+    min-height: 3rem;
+    padding: 0rem 1rem;
+    border-bottom: 1px solid black;
 }
-.companyNameAndLogo{
+.companyLogoAndNameHolder{
     display: flex;
     align-items: center;
-    padding: 0.5rem 1rem;
-    font-size: 1.25rem;
-    gap: 0.25rem;
-    color: white;
+    gap: 0.5rem;
 }
 .companyLogo{
     display: grid;
     place-items: center;
 }
 .companyLogo img{
-    width: 2rem;
+    width: 2.25rem;
 }
-
-/* core navigation bar */
-.navigationBarWrapper{
-    width: 40%;
-    display: flex;
-    justify-content: end;
-    height: 99%;
-    /* border: 1px solid yellow; */
-    padding: 0rem 1rem;
+.companyName{
+    color: whitesmoke;
+    font-size: 18px;
 }
-.navigationItemsWrapper{
-    width: 90%;
-    display: flex;
-    align-items: center;
-    /* border: 1px solid green; */
-}
-.sliderButtonHolder{
-    width: 8%;
-    /* display: grid; */
-    place-items: center;
-    display: none;
+.mobileNavigationButton{
     z-index: 10;
 }
-.mobileCenterNavItemWrapper{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    /* border: 1px solid magenta; */
-    gap: 2rem;
-}
-
-
-/* notification */
-.notification{
+.menuBtn,.closeBtn{
     display: grid;
     place-items: center;
 }
-.notification img{
-    width: 1.25rem;
-    filter: invert(1);
+.menuBtn img,.closeBtn img{
+    width: 1.35rem;
 }
-
-/* menu button holder */
-.menuBtnHolder img,.closeBtnHolder img{
-    width: 1.25rem;
-}
-/* screen specific css */
-
-.alternateActive{
+.hideAlternateButton{
     display: none;
 }
-.hideNotificationName{
+
+/* navigation button */
+.navigationBarWrapper{
+    width: 30%;
+}
+.navigationItemsWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.mobileViewOnly{
     display: none;
-    color: white;
-    font-size: 0.85rem;
 }
 
-@media screen and (min-width:301px) and (max-width:700px) {
-    .mobileViewButton{
-        display: grid;
+@media screen and (min-width:351px) and (max-width:800px) {
+     .companyLogo img{
+        width: 1.75rem;
     }
-    .navigationItemsWrapper{
+    .companyName{
+        font-size: 1rem;
+    }
+    .menuBtn img,.closeBtn img{
+        width: 1.25rem;
+    }
+    .mobileViewOnly{
+        display: block;
+    }
+    .navigationBarWrapper{
         position: absolute;
         top: 0;
         right: 0;
-        height: 100vh;
         width: 10rem;
+        height: 100vh;
         z-index: 5;
-        /* background-color: rgba(250, 235, 215, 0.319); */
-        background-color: rgba(0, 0, 0, 0.332);
-        backdrop-filter: blur(10px);
-        display: none;
-        align-items: start;
-        padding: 5rem 0rem;
-    }
-    .mobileCenterNavItemWrapper{
-        display: flex;
-        flex-direction: column;
-    }
-    .mobileCenterNavItemWrapper div{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    .showOnClick{
-        display: flex;
-    }
-    .hideNotificationIcon{
-        display: none;
-    }
-    .hideNotificationName{
-        display: block;
-    }
-}
-@media screen and (max-width:300px) {
-    .mobileViewButton{
+        background-color: rgba(0, 0, 0, 0.361);
+        backdrop-filter: blur(5px);
         display: grid;
     }
     .navigationItemsWrapper{
+        flex-direction: column;
+        min-height: 40vh;
+        max-height: 45vh;
+        margin-top: 5rem;
+    }
+    .navItem{
+        display: grid;
+        place-items: center;
+    }
+    .hiddenMenu{
+        display: none;
+    }
+}
+@media screen and (max-width:350px) {
+    .companyLogo img{
+        width: 1.5rem;
+    }
+    .companyName{
+        font-size: 0.9rem;
+    }
+    .menuBtn img,.closeBtn img{
+        width: 1.15rem;
+    }
+    .mobileViewOnly{
+        display: block;
+    }
+    .navigationBarWrapper{
         position: absolute;
         top: 0;
         right: 0;
-        height: 100vh;
         width: 10rem;
+        height: 100vh;
         z-index: 5;
-        /* background-color: rgba(250, 235, 215, 0.319); */
-        background-color: rgba(0, 0, 0, 0.332);
-        backdrop-filter: blur(10px);
-        display: none;
-        align-items: start;
-        padding: 5rem 0rem;
+        background-color: rgba(0, 0, 0, 0.361);
+        backdrop-filter: blur(5px);
+        display: grid;
     }
-    .mobileCenterNavItemWrapper{
-        display: flex;
+    .navigationItemsWrapper{
         flex-direction: column;
+        min-height: 40vh;
+        max-height: 45vh;
+        margin-top: 5rem;
     }
-    .mobileCenterNavItemWrapper div{
-        width: 100%;
-        display: flex;
-        justify-content: center;
+    .navItem{
+        display: grid;
+        place-items: center;
     }
-    .showOnClick{
-        display: flex;
-    }
-    .hideNotificationIcon{
+    .hiddenMenu{
         display: none;
-    }
-    .hideNotificationName{
-        display: block;
     }
 }

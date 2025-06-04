@@ -31,8 +31,12 @@ subscribeToNewsLetterButton.addEventListener('click',async(e)=>{
         const response = await request.json();
         messageDisplayAndHide(response.message);
         if(response.success){
-            customerEmail.setAttribute('disabled',true);
-            customerEmail.value = '';
+            subscribeToNewsLetterButton.textContent = 'Subscribed';
+            subscribeToNewsLetterButton.setAttribute('disabled',true);
         }
     }
 });
+customerEmail.addEventListener('input',()=>{
+    subscribeToNewsLetterButton.removeAttribute('disabled');
+    subscribeToNewsLetterButton.textContent = 'Subscribe';
+})

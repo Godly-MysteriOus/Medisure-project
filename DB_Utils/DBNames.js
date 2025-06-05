@@ -4,6 +4,8 @@ const DB_Names = {
     sellerRegistrationDB : 'store_db',
     userQueriesDB : 'user_queries',
     newsLetterDB : 'news_letter_subscription_db',
+    adminRegistrationDB : 'admin_info',
+    centralMedicineDB:'medicine_db',
 };
 
 module.exports = DB_Names;

@@ -82,15 +82,14 @@ app.get('/csrf-token',csrfProtection,(req,res,next)=>{
         csrfToken: token,
     });
 });
-// const signupAuthRoute = require('./routes/signupRoute');
-// const loginLogoutRoute = require('./routes/login_logout');
+const loginLogoutRoute = require('./routes/signupRoute');
 // const sellerRoute = require('./routes/sellerRoute');
 // const customerRoute = require('./routes/customerRoute');
 const commonRoute = require('./routes/commonRoute');
 const generalRoute = require('./routes/generalRoute');
-// app.use('/signup',signupAuthRoute);
 // app.use('/customer',customerRoute);
 // app.use('/seller',sellerRoute);
+app.use('/signup',loginLogoutRoute);
 app.use('/common',commonRoute);
 app.use(generalRoute);
 

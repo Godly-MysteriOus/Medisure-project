@@ -1,41 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&display=swap');
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
 }
 html,body{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-
+input{
+  background-color: transparent;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.808);
+}
+input:focus,input:active{
+  outline: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+textarea,input{
+  width: 100%;
+}
 .montserrat {
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .rowdies-light {
-    font-family: "Rowdies", sans-serif;
-    font-weight: 300;
-    font-style: normal;
+  font-family: "Rowdies", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
 .rowdies-regular {
-    font-family: "Rowdies", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Rowdies", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .rowdies-bold {
-font-family: "Rowdies", sans-serif;
-font-weight: 700;
-font-style: normal;
+  font-family: "Rowdies", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
+.kanit-light {
+  font-family: "Kanit", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.kanit-regular {
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kanit-medium {
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.kanit-semibold {
+  font-family: "Kanit", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.kanit-bold {
+  font-family: "Kanit", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
 
 /* provided a smooth slide border animation for home page footer items */
 .footer-nav-item::after,.hideNotificationName::after {

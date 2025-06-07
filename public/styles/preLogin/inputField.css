@@ -1,0 +1,30 @@
+/* css for input fields */
+
+.fieldWrapper{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+    font-size: 0.85rem;
+}
+.required{
+    color: red;
+}
+.fieldName{
+    width: 35%;
+}
+.inputHolder{
+    width: 50%;
+    display: flex;
+}
+
+.eyeButtonForPassword{
+    display: grid;
+    place-items: center;
+    padding: 0rem .2rem;
+}
+.passImg{
+    width: 1rem;
+}

@@ -1,0 +1,17 @@
+<div class="fieldWrapper">
+    <div class="fieldName"><%= displayName %> <% if (isRequired) { %><span class="required">*</span><% } %></div>
+    <div class="inputHolder">
+        <% if (isTextArea) { %>
+         <textarea class="<%= className %>" cols="5"<% if (isRequired) { %>required<% } %> <% if (isDisabled) { %>disabled<% } %>></textarea>
+        <% } %>
+        <input type="<%= inputType %>" class="<%= className %>" <% if (isRequired) { %>required<% } %> <% if (isDisabled) { %>disabled<% } %>><% if (inputType=='password') { %>
+            <span class="eyeButtonForPassword"><img src="/images/view.png" alt="" class="<%=passwordClassName%> passImg"></span>
+        <% } %>
+    </div>
+</div>
+<!-- variables
+    displayName -- to display field Name
+    isRequired -- is this field required or can it be empty
+    isTextArea -- input should be a text area or input block
+    isDisabled -- should it be editable or not
+-->

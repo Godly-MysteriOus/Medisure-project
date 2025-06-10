@@ -1,0 +1,24 @@
+<style>
+    .inputAndButtonHolder{
+        width: 50%;
+    }
+    .emailVerificationButtonHolder{
+        display: flex;
+        justify-content: space-between;
+        padding: 0.1rem 0.6rem;
+    }
+</style>
+<div class="fieldWrapper">
+    <div class="fieldName">Email Id <% if (isRequired) { %><span class="required">*</span><% } %></div>
+    <div class="inputAndButtonHolder">
+        <div class="emailInputHolder"><input type="email" class="emailIdToVerify" <% if (isRequired) { %> required <% } %> <% if (isDisabled) { %>disabled<% } %>></div>
+        <div class="emailVerificationButtonHolder">
+            <div class="resetBtnHolder"><button type="button" class="emailResetBtn button-5-small">Reset</button> </div>
+            <div class="submitBtnHolder"><button class="emailSubmitButton button-5-small" type="button">Verify</button></div>
+        </div>
+    </div>
+</div>
+<!-- variables
+    isRequired
+    isDisabled
+-->

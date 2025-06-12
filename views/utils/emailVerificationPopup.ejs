@@ -1,0 +1,90 @@
+<style>
+    .crossBtnHolder{
+        display: flex;
+        justify-content: end;
+        width: 100%;
+    }
+    .crossBtn img{
+        width: 1rem;
+        filter: brightness(0%) contrast(100%);
+        cursor: pointer;
+    }
+    .verificationPopupWrapperContainer{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        display: grid;
+        place-items: center;
+        z-index: 10;
+        backdrop-filter: blur(15px);
+        background-color: rgba(237, 236, 236, 0.05);
+    }
+    .verificationPopupWrapper{
+        width: 25rem;
+        backdrop-filter: blur(5px);
+        height: fit-content;
+        z-index: 10;
+        background-color: rgba(37, 37, 37, 0.232);
+        /* box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.161); */
+        border-radius: 0.75rem;
+        padding: 1rem 1.5rem;
+        display: grid;
+        place-items: center;
+    }
+    .verificationPopup--header{
+        text-align: center;
+        padding: 1rem 0rem;
+    }
+    .verificationFormWrapper{
+        width: 20rem;
+        padding: 1rem 0rem;
+    }
+    .emailVerification--buttonHolder,.reGenerateOTPBtnHolder{
+        display: grid;
+        place-items: center;
+        padding: 1rem;
+        position: relative;
+    }
+    .regenerateHeaderHolder{
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    .regenerateOTPBtn{
+        display: grid;
+        color: white;
+        place-items: center;
+        background: -webkit-linear-gradient(to right, #3a6186e6);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right,  #3a6186e6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        border-radius: 0.5rem;
+        height: fit-content;
+        padding: 0.2rem 0.5rem;
+        border: none;
+        cursor: pointer;
+    }
+    .regenerateOTPBtn:hover{
+        background: -webkit-linear-gradient(to right, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right,  #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    .verifyOnClick{
+        display: none;
+    }
+</style>
+
+<div class="verificationPopupWrapperContainer verifyOnClick">
+    <div class="verificationPopupWrapper">
+        <div class="crossBtnHolder"><div class="crossBtn"><img src="/images/close.png" alt=""></div></div>
+        <div class="verificationPopup--header kanit-medium">Verify OTP Here
+        </div>
+        <div class="verificationFormWrapper">
+            <%- include('./inputField.ejs',{displayName:'Enter OTP',isRequired:true,isDisabled:false,isTextArea:false,inputType:'number',className:'emailOTPInput',passwordClassName:''}) %>
+            <div class="emailVerification--buttonHolder">
+                <button class="verifyBtn button-6 kanit-light" type="button">Verify</button>
+            </div>
+            <br>
+            <div class="reGenerateOTPWrapper">
+                <div class="regenerateHeaderHolder kanit-light">Didn't recieved OTP ?</div>
+                <div class="reGenerateOTPBtnHolder"><button class="regenerateOTPBtn kanit-light" type="button">Regenerate OTP</button></div>
+            </div>
+        </div>
+    </div>
+</div>

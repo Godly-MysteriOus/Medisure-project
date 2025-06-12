@@ -14,10 +14,10 @@
                     <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
                     <div class="navItem"><button class="signup button-3 montserrat" onclick="window.location.href = url+'signup/customer'">Signup</button></div>
                 <% }else if(page=='loginPage'){%>
-                    <div class="navitem montserrat">Home</div>
+                    <div class="navitem homeNavItem footer-nav-item" onclick="window.location.href=url">Home</div>
                     <div class="navItem"><button class="signup button-3 montserrat" onclick="window.location.href = url+'signup/customer'">Signup</button></div>
-                <%}else if(page=="signupPage"){%>
-                    <div class="navitem">Home</div>
+                <%}else if(page=="customerSignUpPage"){%>
+                    <div class="navitem homeNavItem montserrat footer-nav-item" onclick="window.location.href=url">Home</div>
                     <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
                 <%}%>
                 <div class="navItem"><button class="contactUsBtn button-3 montserrat">Contact Us</button></div>

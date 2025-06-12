@@ -1,12 +1,13 @@
 <style>
     .inputAndButtonHolder{
-        width: 50%;
+        width: 58%;
     }
     .emailVerificationButtonHolder{
         display: flex;
         justify-content: space-between;
         padding: 0.1rem 0.6rem;
     }
+
 </style>
 <div class="fieldWrapper">
     <div class="fieldName">Email Id <% if (isRequired) { %><span class="required">*</span><% } %></div>
@@ -22,3 +23,10 @@
     isRequired
     isDisabled
 -->
+    <script src="/scripts/emailOTPVerification.js"></script>
+    <script>
+        const submitBtnHolder = document.querySelector('.submitBtnHolder');
+        submitBtnHolder.addEventListener('click',(e)=>{
+            showVerificationPopUp();
+        });
+    </script>

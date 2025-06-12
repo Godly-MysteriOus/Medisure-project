@@ -61,6 +61,7 @@
         border-radius: 0.5rem;
         height: fit-content;
     }
+
 </style>
     <body class="customerSignupBody">
         <%- include('../utils/variablesAndMessageBox.ejs') %>
@@ -68,6 +69,7 @@
             <%- include('../utils/customerHeader.ejs',{isLoggedIn:false,page:landedPage}) %>
         </div>
         <div class="mainBody">
+            <%- include('../utils/emailVerificationPopup.ejs') %>
             <div class="contentWrapper">
                 <div class="pageHeading kanit-medium ">Lets Get Started</div>
                 <div class="formWrapper">

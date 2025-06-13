@@ -13,10 +13,10 @@
     color: red;
 }
 .fieldName{
-    width: 35%;
+    width: 30%;
 }
 .inputHolder{
-    width: 50%;
+    min-width: max(10rem,58%);
     display: flex;
 }
 

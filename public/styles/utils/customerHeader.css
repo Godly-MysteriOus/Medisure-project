@@ -48,12 +48,19 @@
     width: 100%;
     display: flex;
     justify-content: end;
+    align-items: center;
 }
 .mobileViewOnly{
     display: none;
 }
 .navItem{
     padding: 0.2rem 1rem;
+}
+.homeNavItem{
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.75rem;
+    padding: 0rem 0.75rem;
+    cursor: pointer;
 }
 @media screen and (min-width:351px) and (max-width:900px) {
      .companyLogo img{

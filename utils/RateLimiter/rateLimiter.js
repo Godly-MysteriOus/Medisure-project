@@ -6,7 +6,11 @@ const limiter = (rate,refreshTime) => rateLimit({
     standardHeaders: true, // Add RateLimit headers in the response
     legacyHeaders: false, // Disable X-RateLimit-* headers
     handler: (req, res) => {
-        res.status(429).render('429Page');
+        res.status(429).json({
+            success:false,
+            message:'Too Many Requests',
+            redirectTo : '429Error',
+        });
     },
 });
 

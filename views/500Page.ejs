@@ -1,0 +1,13 @@
+<%- include('./utils/start.ejs',{headerType:''}) %>
+<link rel="stylesheet" href="/styles/utils/500Page.css">
+</head>
+    <body class="error500">
+        <%- include('./utils/variablesAndMessageBox.ejs') %>
+        <div class="errorImageHolder">
+            <img src="/images/500Error.jpg" alt="500Error.png">
+            <div class="errorMessage montserrat">
+                Sorry for the inconvenience caused. Be assured, our engineers are working on it.<br><br>Please try again in a few moments.</p>
+            </div>
+        </div>
+    </body>
+</html>

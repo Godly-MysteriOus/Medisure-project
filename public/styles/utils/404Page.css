@@ -11,13 +11,14 @@
     place-items: center;
 }
 .errorImageContainer img{
-    width: 40%;
+    width: 35rem;
 }
 .navigateToHomePage{
-    margin-top: 3rem;
+    margin-top: 1rem;
     display: grid;
     place-items: center;
     min-height: 5rem;
+    text-align: center;
 }
 .homePageButtonHolder{
     height: 3rem;
@@ -32,4 +33,19 @@
 .homePageButton:hover{
     font-weight: 500;
     zoom: 1.05;
+}
+@media screen and (min-width:701px) and (max-width:1200px) {
+    .errorImageContainer img{
+        width: 25rem;
+    }
+}
+@media screen and (min-width:351px) and (max-width:700px) {
+    .errorImageContainer img{
+        width: 19rem;
+    }
+}
+@media screen and (max-width:350px) {
+    .errorImageContainer img{
+        width: 15rem;
+    }
 }

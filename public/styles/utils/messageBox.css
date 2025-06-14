@@ -1,0 +1,20 @@
+.messageBoxContainer{
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    z-index: 100;
+}
+.messageContainer{
+    text-align: center;
+    width: fit-content;
+    background-color: rgba(240, 248, 255, 0.588);
+    padding: 0.3rem 1rem;
+    border-radius: 0.3rem;
+    backdrop-filter: blur(10px);
+}
+.messageHidden{
+    display: none;
+}

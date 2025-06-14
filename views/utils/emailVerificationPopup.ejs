@@ -1,0 +1,18 @@
+<div class="verificationPopupWrapperContainer verifyOnClick">
+    <div class="verificationPopupWrapper">
+        <div class="crossBtnHolder"><div class="crossBtn"><img src="/images/close.png" alt=""></div></div>
+        <div class="verificationPopup--header kanit-medium">Verify OTP Here
+        </div>
+        <div class="verificationFormWrapper">
+            <%- include('./inputField.ejs',{displayName:'Enter OTP',isRequired:true,isDisabled:false,isTextArea:false,inputType:'number',className:'emailOTPInput',passwordClassName:''}) %>
+            <div class="emailVerification--buttonHolder">
+                <button class="verifyBtn button-6 kanit-light" type="button">Verify</button>
+            </div>
+            <br>
+            <div class="reGenerateOTPWrapper">
+                <div class="regenerateHeaderHolder kanit-light">Didn't recieved OTP ?</div>
+                <div class="reGenerateOTPBtnHolder"><button class="regenerateOTPBtn kanit-light" type="button">Regenerate OTP</button></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,7 +4,7 @@
         <% if (isTextArea) { %>
          <textarea class="<%= className %>" cols="5"<% if (isRequired) { %>required<% } %> <% if (isDisabled) { %>disabled<% } %>></textarea>
         <% } %>
-        <input type="<%= inputType %>" class="<%= className %>" <% if (isRequired) { %>required<% } %> <% if (isDisabled) { %>disabled<% } %>><% if (inputType=='password') { %>
+        <input type="<%= inputType %>" autocomplete="off" class="<%= className %>" <% if (isRequired) { %>required<% } %> <% if (isDisabled) { %>disabled<% } %>><% if (inputType=='password') { %>
             <span class="eyeButtonForPassword"><img src="/images/view.png" alt="" class="<%=passwordClassName%> passImg"></span>
         <% } %>
     </div>

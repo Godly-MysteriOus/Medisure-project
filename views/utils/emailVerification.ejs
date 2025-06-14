@@ -5,16 +5,17 @@
     .emailVerificationButtonHolder{
         display: flex;
         justify-content: space-between;
-        padding: 0.1rem 0.6rem;
+        padding: 0.1rem 0.1rem;
     }
 
 </style>
 <div class="fieldWrapper">
     <div class="fieldName">Email Id <% if (isRequired) { %><span class="required">*</span><% } %></div>
     <div class="inputAndButtonHolder">
-        <div class="emailInputHolder"><input type="email" class="emailIdToVerify" <% if (isRequired) { %> required <% } %> <% if (isDisabled) { %>disabled<% } %>></div>
+        <div class="emailInputHolder">
+            <input type="email" class="emailIdToVerify" <% if (isRequired) { %> required <% } %> <% if (isDisabled) { %>disabled<% } %>></div>
         <div class="emailVerificationButtonHolder">
-            <div class="resetBtnHolder"><button type="button" class="emailResetBtn button-5-small">Reset</button> </div>
+            <div class="resetBtnHolder"><button type="button" class="emailResetBtn button-5-small">Change EmailId</button> </div>
             <div class="submitBtnHolder"><button class="emailSubmitButton button-5-small" type="button">Verify</button></div>
         </div>
     </div>
@@ -23,10 +24,5 @@
     isRequired
     isDisabled
 -->
-    <script src="/scripts/emailOTPVerification.js"></script>
-    <script>
-        const submitBtnHolder = document.querySelector('.submitBtnHolder');
-        submitBtnHolder.addEventListener('click',(e)=>{
-            showVerificationPopUp();
-        });
-    </script>
+    <script src="/scripts/utils/emailOTPVerification.js"></script>
+    <script src="/scripts/utils/emailOTPGeneration.js"></script>

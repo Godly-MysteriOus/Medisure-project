@@ -7,8 +7,28 @@ const verifyBtn = document.querySelector('.verifyBtn');
 
 
 regenerateOTPBtn.addEventListener('click',async(e)=>{
-    messageDisplayAndHide('OTP Send Succesfully');
-    let time = 70;
+    if(!emailPatternValidation()){
+        messageDisplayAndHide('Invalid Email Pattern');
+        return;
+    }
+    const csrfToken = await getCsrfToken();
+    const request = await fetch(url+'common/generate-OTP',{
+        signal:AbortSignal.timeout(5000),
+        method:'POST',
+        headers:{'Content-Type':'application/json',
+            'CSRF-Token':csrfToken,
+        },
+        body:JSON.stringify({
+            emailId : emailIdToVerify.value,
+        }),
+    });
+    const response = await request.json();
+    if(request.status==429){
+        window.location.href = url+response.redirectTo;
+    }else{
+        messageDisplayAndHide(response.message);
+    }
+    let time = 120;
     const interval = setInterval(()=>{
         if(time==0){
             regenerateOTPBtn.textContent = `Regenerate OTP`;

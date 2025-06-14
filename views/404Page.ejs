@@ -1,11 +1,12 @@
-<%- include('./utils/start.ejs') %>
+<%- include('./utils/start.ejs',{headerType:''}) %>
 <link rel="stylesheet" href="/styles/utils/404Page.css">
 </head>
     <body class="a404Body">
-        <%- include('./utils/variables.ejs') %>
+        <%- include('./utils/variablesAndMessageBox.ejs') %>
         <div class="errorImageContainer">
             <img src="/images/404Error.png" alt="404 Error image">
             <div class="navigateToHomePage montserrat">
+                Requested Page Not Found ! <br><br>
                 Go Back To Home Page
                 <div class="homePageButtonHolder">
                     <button class="button-1 homePageButton montserrat">Click Here</button>

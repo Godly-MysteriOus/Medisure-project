@@ -1,8 +1,97 @@
 .button-1{
     padding: 0.25rem 1rem;
-    background-color: rgb(254, 41, 80);
+    background-color: rgba(254, 41, 80, 0.847);
     border: none;
     border: 1px solid rgb(253, 35, 75);
     border-radius: 0.25rem;
     cursor: pointer;
+}
+.button-1:hover{
+    background-color: rgb(254, 41, 80);
+}
+.button-2{
+    padding: 0.25rem 1rem;
+    background-color: #89253e;
+    border: none;
+    border: 1px solid #89253e;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.button-3{
+    width: fit-content;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(245, 245, 245, 0.15);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    font-size: 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.237);
+}
+.button-3:hover{
+    background-color: rgba(245, 245, 245, 0.25);
+}
+.button-4{
+    padding: 0.2rem 0.5rem;
+    background-color: #0a897229;
+    border: 1px solid #0a8972db;
+    font-size: 0.8rem;
+    min-width: fit-content;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    border-radius: 0.35rem;
+}
+.button-4:hover,.button-4:active{
+    background-color: #0a89723f;
+}
+
+.button-5{
+    width: fit-content;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(245, 245, 245, 0.1);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    font-size: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.237);
+}
+.button-5:hover{
+    background-color: rgba(245, 245, 245, 0.15);
+}
+.button-5-small{
+    width: fit-content;
+    padding: 0.2rem 0.5rem;
+    background-color: rgba(245, 245, 245, 0.05);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    font-size: 0.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.237);
+}
+.button-5-small:hover{
+    background-color: rgba(245, 245, 245, 0.08);
+}
+
+.button-6{
+    display: grid;
+    place-items: center;
+    background: #3a6186;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #89253ef4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #89253ef4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 0.5rem;
+    height: fit-content;
+    padding: 0.2rem 0.5rem;
+    color: whitesmoke;
+    border: none;
+    cursor: pointer;
+}
+.button-6:hover{
+    background: -webkit-linear-gradient(to right, #89253efb);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #89253efb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

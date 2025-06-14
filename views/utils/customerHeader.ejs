@@ -1,0 +1,61 @@
+<div class="header">
+    <div class="companyLogoAndNameHolder">
+        <div class="companyLogo"><img src="/images/companyLogo.png" alt=""></div>
+        <div class="companyName rowdies-regular">Medisure</div>
+    </div>
+    <div class="navigationBarWrapper hiddenMenu">
+        <div class="navigationItemsWrapper">
+            <% if (isLoggedIn) { %>
+                <!-- show this if user is logged in as per page -->
+             
+            <% }else{%>
+                <!-- show this if user is not lpgged in as per page -->
+                <% if (page=='customerHomePage') { %>
+                    <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
+                    <div class="navItem"><button class="signup button-3 montserrat" onclick="window.location.href = url+'signup/customer'">Signup</button></div>
+                <% }else if(page=='loginPage'){%>
+                    <div class="navitem homeNavItem footer-nav-item" onclick="window.location.href=url">Home</div>
+                    <div class="navItem"><button class="signup button-3 montserrat" onclick="window.location.href = url+'signup/customer'">Signup</button></div>
+                <%}else if(page=="customerSignUpPage"){%>
+                    <div class="navitem homeNavItem montserrat footer-nav-item" onclick="window.location.href=url">Home</div>
+                    <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
+                <%}%>
+                <div class="navItem"><button class="contactUsBtn button-3 montserrat">Contact Us</button></div>
+            <%}%>
+        </div>
+    </div>
+    <div class="mobileNavigationButton mobileViewOnly">
+        <div class="menuBtn"><img src="/images/menu.png" alt="hamburger menu icon"></div>
+        <div class="closeBtn hideAlternateButton"><img src="/images/close.png" alt="closeButton icon"></div>
+    </div>
+</div>
+
+<script>
+    const mobileNavigationButton = document.querySelector('.mobileNavigationButton');
+    const menuBtn = document.querySelector('.menuBtn');
+    const closeBtn = document.querySelector('.closeBtn');
+    const hideAlternateButton = 'hideAlternateButton';
+    const navigationBarWrapper = document.querySelector('.navigationBarWrapper');
+    const hiddenMenu = 'hiddenMenu';
+
+    document.querySelector('body').addEventListener('click',(e)=>{
+        // on when you dont click on navigation bar and navigation button, the sidebar will fade away
+        if(e.target.closest('.navigationBarWrapper')==null && !e.target.closest('.mobileNavigationButton')){
+            // the sidebar will only fade when it is opened
+            if(menuBtn.classList.contains(hideAlternateButton)){
+                menuBtn.classList.toggle(hideAlternateButton);
+                closeBtn.classList.toggle(hideAlternateButton);
+                navigationBarWrapper.classList.add(hiddenMenu);
+            }
+        }
+    });
+    mobileNavigationButton.addEventListener('click',()=>{
+        menuBtn.classList.toggle(hideAlternateButton);
+        if(menuBtn.classList.contains(hideAlternateButton)){
+            navigationBarWrapper.classList.remove(hiddenMenu);
+        }else{
+            navigationBarWrapper.classList.add(hiddenMenu);
+        }
+        closeBtn.classList.toggle(hideAlternateButton);
+    });
+</script>

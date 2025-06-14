@@ -1,0 +1,42 @@
+.error500{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background: white;
+}
+.errorImageHolder{
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+.errorImageHolder img{
+    height: 25rem;
+}
+.errorMessage{
+    margin-top: 1.5rem;
+    text-align: center;
+    padding: 0.25rem 1rem;
+}
+
+@media screen and (min-width:701px) and (max-width:1200px) {
+    .errorImageHolder img{
+        height: 21rem;
+    }
+}
+@media screen and (min-width:351px) and (max-width:700px) {
+    .errorImageHolder img{
+        height: 17rem;
+    }
+    .errorMessage{
+        font-size: 0.8rem;
+    }
+}
+@media screen and (max-width:350px) {
+    .errorImageHolder img{
+        height: 15rem;
+    }
+    .errorMessage{
+        font-size: 0.7rem;
+    }
+}

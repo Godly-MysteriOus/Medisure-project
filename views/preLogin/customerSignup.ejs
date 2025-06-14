@@ -1,0 +1,36 @@
+<%- include('../utils/start.ejs',{headerType:'customer'}) %>
+    <link rel="stylesheet" href="/styles/utils/emailVerificationPopUp.css">
+    <link rel="stylesheet" href="/styles/preLogin/customerSignUp.css">
+</head>
+    <body class="customerSignupBody">
+        <%- include('../utils/variablesAndMessageBox.ejs') %>
+        <div class="customerSignUpHeaderHolder">
+            <%- include('../utils/customerHeader.ejs',{isLoggedIn:false,page:landedPage}) %>
+        </div>
+        <div class="mainBody">
+            <%- include('../utils/emailVerificationPopup.ejs') %>
+            <div class="contentWrapper">
+                <div class="pageHeading kanit-medium ">Lets Get Started</div>
+                <div class="formWrapper">
+                    <link rel="stylesheet" href="/styles/preLogin/inputField.css">
+                    <form method="post">
+                        <%- include('../utils/inputField.ejs',{displayName:'Name',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'customerName',passwordClassName:''}) %>
+                        <%- include('../utils/emailVerification.ejs',{isRequired:true,isDisabled:false}) %>
+                        <%- include('../utils/inputField.ejs',{displayName:'Password',isRequired:true,isTextArea:false,isDisabled:false,inputType:'password',className:'customerPassword',passwordClassName:'passwordViewImage'}) %>
+                        <%- include('../utils/inputField.ejs',{displayName:'Re-enter Password',isRequired:true,isTextArea:false,isDisabled:false,inputType:'password',className:'customerRePassword',passwordClassName:'rePasswordViewImage'}) %>
+                        <%- include('../utils/inputField.ejs',{displayName:'Mobile Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'number',className:'customerMobileNumber',passwordClassName:''}) %>
+                        <br>
+                        <div class="buttonHolder">
+                            <div class="resetBtnHolder"><button class="button-5" type="reset">Reset</button></div>
+                            <div class="submitBtnHolder"><button class="button-5">Submit</button></div>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+                <div class="moreOptionHolder kanit-light">Want to sell with us ? <button class="button-4">Signup as Seller</button></div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script src="/scripts/preLogin/customerSignup.js"></script>

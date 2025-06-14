@@ -12,17 +12,18 @@ if (!fs.existsSync(logDir)) {
 // Truncate (clear) log file on restart
 const date = new Date().toISOString().split('T')[0];
 const logFilePath = path.join(logDir, `app-${date}.log`);
+
 fs.writeFileSync(logFilePath, "");
 
 // Logger Configuration
-const logger = createLogger({
-    level: "info",
+const logger= (fileName) => createLogger({
+    level: "silly",
     format: format.combine(
         format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-        format.printf(({ timestamp, level, message }) => `${timestamp} [${level.toUpperCase()}]: ${message}`)
+        format.printf(({ timestamp, level, message }) => `${level.toUpperCase()}: In ${fileName} : ${timestamp} -- ${message}`)
     ),
     transports: [
-        new transports.Console({ format: format.combine(format.colorize(), format.simple()) }),
+        new transports.Console({ format: format.combine(format.colorize()) }),
 
         // ✅ Log Rotation - Rotates daily & keeps logs for 14 days
         new DailyRotateFile({

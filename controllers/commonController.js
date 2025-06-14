@@ -1,15 +1,21 @@
 
 const {validationResult} = require('express-validator');
-const logger = require('../utils/Logger/logger');
+const path = require('path');
+const fileName = path.basename(__filename);
+const dirName = path.dirname(__filename).split(/[/\\]/).pop();
+const logger = require('../utils/Logger/logger')(dirName+'/'+fileName);
 const newsLetterDB = require('../models/newsLetter');
 const userQueriesDB = require('../models/userQueries');
 const mongoose = require('mongoose');
-exports.postSubscriptionToNewsLetter = async(req,res,next)=>{
+const Result = require('../classes/result');
+
+exports.postSubscriptionToNewsLetter = async(req,res,next)=>{ 
+    const result = new Result();
     logger.info('Inside postSubscriptionToNewsLetter method!!!');
     const error = validationResult(req);
-    const {emailId} = req.body;
+    const {email} = req.body;
     if(!error.isEmpty()){
-        logger.debug('Errors found while validating inputs.');
+        logger.debug('Errors found while validating inputs.',error.array());
         return res.status(400).json({
             success:false,
             message: error.array()[0].msg,
@@ -18,27 +24,32 @@ exports.postSubscriptionToNewsLetter = async(req,res,next)=>{
     const transactionSession = await mongoose.startSession();
     try{
         transactionSession.startTransaction();
-        const isAlreadySubscribed = await newsLetterDB.findOne({emailId:emailId});
+        const isAlreadySubscribed = await newsLetterDB.findOne({emailId:email});
         if(isAlreadySubscribed){
             logger.debug('Email Id already in subscription list');
-            throw new Error('Already Subscribed');
-        }
-        const saveForSubscription = await newsLetterDB.create([{emailId:emailId}],{session:transactionSession});
-        if(!saveForSubscription){
-            logger.debug('Error creating entry to the database for news Letter subscription');
-            throw new Error('Error subscribing to news letter');
+            result.setSuccess(false);
+            result.setMessage('Already Subscribed');
+        }else{
+            const saveForSubscription = await newsLetterDB.create([{emailId:email}],{session:transactionSession});
+            if(!saveForSubscription){
+                logger.debug('Error creating entry to the database for news Letter subscription');
+                throw new Error('Error subscribing to news letter');
+            }else{
+                result.setSuccess(true);
+                result.setMessage('Successfully Subscribed.');
+            }
         }
         await transactionSession.commitTransaction();
         await transactionSession.endSession();
         return res.status(200).json({
-            success:true,
-            message:'Successfully Subscribed.',
+            success:result.getSuccess(),
+            message:result.getMessage(),
         });
     }catch(e){
         transactionSession.abortTransaction();
         transactionSession.endSession();
         let message = '';
-        if(e.message=='Already Subscribed' || e.message=='Error subscribing to news letter'){
+        if(e.message=='Error subscribing to news letter'){
             message = e.message;
         }else{
             message = 'Error occoured, please try again!';
@@ -52,6 +63,7 @@ exports.postSubscriptionToNewsLetter = async(req,res,next)=>{
     }
 }
 function IndianStandardTime(){
+    logger.info('Inside IndianStandardTime method!!!');
     const nowUTC = new Date();
     let nowIST;
     if(nowUTC.toString().includes('Indian Standard Time')){
@@ -66,7 +78,7 @@ exports.postUserQueries = async(req,res,next)=>{
     const {emailId,mobileNo,message} = req.body;
     const error = validationResult(req);
     if(!error.isEmpty()){
-        console.log(error.array());
+        logger.error('Validation Error in postUserQueries method !',error.array());
         return res.status(400).json({
             success:false,
             message : error.array()[0].msg,
@@ -101,6 +113,50 @@ exports.postUserQueries = async(req,res,next)=>{
         res.status(400).json({
             success:false,
             message:message,
+        });
+    }
+}
+let saveSession=(session)=> {
+    return new Promise((resolve, reject) => {
+        session.save(err => {
+            if (err) {
+                reject(new Error('Failed to save session'));
+            } else {
+                resolve(true);
+            }
+        });
+    });
+}
+
+exports.postEmailOTPGeneration = async(req,res,next)=>{
+    // Generating a 5 digit number
+    logger.debug('Inside postEmailOTPGeneration method');
+    const OTP = String(Math.floor(Math.random()*1000000000)).replaceAll('0','').slice(0,5);
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        logger.error('Validation Errors inside postEmailOTPGeneration method !',errors.array());
+        res.status(400).json({
+            success:false,
+            message : errors.array()[0],
+        });
+    }
+    const {emailId} = req.body;
+    try{
+        req.session.emailId = emailId;
+        req.session.OTP = Number(OTP);
+        req.session.OTPExpirationTime = new Date(Date.now() + 5 * 60 * 1000);
+        req.session.isLoggedIn = false;
+       await saveSession(req.session);
+       logger.debug('OTP generated and stored into session successfully');
+        return res.status(200).json({
+            success:true,
+            message:'OTP Sent Successfully!',
+        });
+    }catch(e){
+        logger.error('Error inside postEmailOTPGeneration method !!!',e);
+        return res.status(400).json({
+            success:false,
+            message: 'Error Generating OTP',
         });
     }
 }

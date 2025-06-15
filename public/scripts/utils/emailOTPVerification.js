@@ -3,6 +3,7 @@ const verificationPopupWrapperContainer = document.querySelector('.verificationP
 const regenerateOTPBtn = document.querySelector('.regenerateOTPBtn');
 const verifyOnClick = 'verifyOnClick';
 const crossBtn = document.querySelector('.crossBtn');
+const emailOTPInput = document.querySelector('.emailOTPInput');
 const verifyBtn = document.querySelector('.verifyBtn');
 
 
@@ -46,14 +47,38 @@ regenerateOTPBtn.addEventListener('click',async(e)=>{
     },1000)
 });
 crossBtn.addEventListener('click',()=>{
+    emailOTPInput.value = '';
     hideVerificationPopUp();
 });
-verifyBtn.addEventListener('click',()=>{
-    hideVerificationPopUp();
-})
 function showVerificationPopUp(){
     verificationPopupWrapperContainer.classList.remove(verifyOnClick);
 }
 function hideVerificationPopUp(){
     verificationPopupWrapperContainer.classList.add(verifyOnClick);
 }
+
+verifyBtn.addEventListener('click',async(e)=>{
+    const csrfToken = await getCsrfToken();
+    const request = await fetch(url+'common/verify-OTP',{
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json',
+            'CSRF-Token': csrfToken,
+        },
+        body:JSON.stringify({
+            otp: emailOTPInput.value.trim(),
+        }),
+        signal:AbortSignal.timeout(5000),
+    });
+    const response = await request.json();
+    if(response.success){
+        setTimeout(()=>{
+            emailOTPInput.value = '';
+            emailSubmitButton.textContent = 'Verified';
+            emailSubmitButton.setAttribute('disabled',true);
+            emailIdToVerify.setAttribute('disabled',true);
+            hideVerificationPopUp();
+        },2500);
+    }
+    messageDisplayAndHide(response.message);
+});

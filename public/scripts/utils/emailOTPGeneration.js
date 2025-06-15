@@ -7,6 +7,9 @@ const submitBtnHolder = document.querySelector('.submitBtnHolder');
     //Reset button to remove content
     emailResetBtn.addEventListener('click',()=>{
         emailIdToVerify.value = '';
+        emailIdToVerify.removeAttribute('disabled');
+        emailSubmitButton.removeAttribute('disabled');
+        emailSubmitButton.textContent = 'Verify';
     });
 
     //function to test input data via regex pattern
@@ -33,7 +36,7 @@ const submitBtnHolder = document.querySelector('.submitBtnHolder');
                 'CSRF-Token':csrfToken,
             },
             body:JSON.stringify({
-                emailId : emailIdToVerify.value,
+                emailId : emailIdToVerify.value.trim(),
             }),
         });
         const response = await request.json();

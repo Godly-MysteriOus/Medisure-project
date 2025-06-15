@@ -2,10 +2,11 @@
 const {validationResult} = require('express-validator');
 const path = require('path');
 const fileName = path.basename(__filename);
-const dirName = path.dirname(__filename).split(/[/\\]/).pop();
-const logger = require('../utils/Logger/logger')(dirName+'/'+fileName);
+const dirName = path.dirname(__filename).split('medisure\\')[1];
+const logger = require('../utils/Logger/logger')(`${dirName}\\${fileName}`);
 const newsLetterDB = require('../models/newsLetter');
 const userQueriesDB = require('../models/userQueries');
+const mailService = require('../utils/mailService/mail');
 const mongoose = require('mongoose');
 const Result = require('../classes/result');
 
@@ -148,10 +149,20 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
         req.session.isLoggedIn = false;
        await saveSession(req.session);
        logger.debug('OTP generated and stored into session successfully');
-        return res.status(200).json({
-            success:true,
-            message:'OTP Sent Successfully!',
-        });
+       const mailResult = await mailService.sendMail(emailId,Number(OTP));
+       if(mailResult){
+            logger.debug('Mail Send Successfully');
+           return res.status(200).json({
+               success:true,
+               message:'OTP Sent Successfully!',
+           });
+       }else{
+            logger.debug('Error Sending mail');
+            return res.status(400).json({
+                success:false,
+                message:'Could not send OTP, Try again later',
+            });
+       }
     }catch(e){
         logger.error('Error inside postEmailOTPGeneration method !!!',e);
         return res.status(400).json({
@@ -159,4 +170,50 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
             message: 'Error Generating OTP',
         });
     }
-}
+};
+
+exports.emailOTPVerification = (req,res,next)=>{
+    logger.info('Inside emailOTPVerification method !!!');
+    const result = new Result();
+    const {otp} = req.body;
+    try{
+        const nowDate = new Date();
+        logger.debug('Checking whether OTP is expired or not');
+        if(req.session?.OTPExpirationTime > nowDate){
+            logger.debug('OTP didn\'t crossed expiration time');
+            if(req.session?.OTP == otp){
+                delete req.session.OTP;
+                delete req.session.OTPExpirationTime;
+                logger.debug('Email OTP Verified Successfully');
+                result.setSuccess(true);
+                result.setMessage('Verified Email Successfully');
+            }else{
+                logger.debug('Wrong OTP');
+                result.setSuccess(false);
+                result.setMessage('Invalid OTP');
+            }
+        }else{
+            logger.debug('Email OTP Expired');
+            result.setSuccess(false);
+            result.setMessage('Email OTP Expired, Regenerate OTP');
+        }
+        logger.debug('Returning result, result: '+result.getMessage()+" success: "+result.getSuccess());
+        if(result.getSuccess()==false){
+            res.status(400).json({
+                success:result.getSuccess(),
+                message:result.getMessage(),
+            });
+        }else{
+            res.status(200).json({
+                success:result.getSuccess(),
+                message : result.getMessage(),
+            });
+        }
+    }catch(err){
+        logger.error('Error inside emailOTPVerification method!!!'+err);
+        return res.status(400).json({
+            success:false,
+            message: 'Error Verifying OTP, Try again later',
+        });
+    }
+};

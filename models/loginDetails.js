@@ -23,5 +23,5 @@ const loginCredentailDB = new Schema({
         enum:[dbNames.userRegistrationDB,dbNames.sellerRegistrationDB,dbNames.adminRegistrationDB],
     }
 });
-
+loginCredentailDB.index({emailId:1});
 module.exports = mongoose.model(dbNames.loginInfoDB,loginCredentailDB,dbNames.loginInfoDB);

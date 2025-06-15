@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const config = require('../config');
 const path = require('path');
 const fileName = path.basename(__filename);
-const dirName = path.dirname(__filename).split(/[/\\]/).pop();
-const logger = require('../utils/Logger/logger')(dirName+'/'+fileName);
+const dirName = path.dirname(__filename).split('medisure\\')[1];
+const logger = require('../utils/Logger/logger')(`${dirName}\\${fileName}`);
 exports.dbURI = {
     devDBConnectionURI : config.devDBConnectionURI,
     prodDBConnectionURI: config.prodDBConnectionURI,

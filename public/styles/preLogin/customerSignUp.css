@@ -41,7 +41,7 @@
 .moreOptionHolder{
     text-align: center;
 }
-.submitBtnHolder{
+.emailSubmitBtnHolder,.submitBtnHolder{
     display: grid;
     place-items: center;
     background: -webkit-linear-gradient(to right, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
@@ -49,7 +49,7 @@
     border-radius: 0.5rem;
     height: fit-content;
 }
-.resetBtnHolder{
+.emailResetBtnHolder,.resetBtnHolder{
     display: grid;
     place-items: center;
     background: #3a6186;  /* fallback for old browsers */
@@ -57,4 +57,27 @@
     background: linear-gradient(to right, #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 0.5rem;
     height: fit-content;
+}
+
+@media screen and (min-width:401px) and (max-width:600px) {
+    .contentWrapper{
+        width: max(23rem,80%);
+    }
+    .moreOptionHolder{
+        font-size: 0.85rem;
+    }
+}
+@media screen and (max-width:400px) {
+    .contentWrapper{
+        width: 90%;
+    }
+    .pageHeading{
+        font-size: 1.25rem;
+    }
+    .resetBtnHolder button,.submitBtnHolder button{
+        font-size: 0.65rem;
+    }
+    .moreOptionHolder{
+        font-size: 0.8rem;
+    }
 }

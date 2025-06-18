@@ -1,4 +1,3 @@
-const submitBtnHolder = document.querySelector('.submitBtnHolder');
     const emailSubmitButton = document.querySelector('.emailSubmitButton');
     const emailIdToVerify = document.querySelector('.emailIdToVerify');
     const emailResetBtn = document.querySelector('.emailResetBtn');
@@ -23,7 +22,8 @@ const submitBtnHolder = document.querySelector('.submitBtnHolder');
             messageDisplayAndHide('Invalid Email Pattern');
         }
     });
-    submitBtnHolder.addEventListener('click',async(e)=>{
+    emailSubmitButton.addEventListener('click',async(e)=>{
+        emailIdToVerify.setAttribute('disabled',true);
         if(!emailPatternValidation()){
             messageDisplayAndHide('Invalid Email Pattern');
             return;

@@ -1,6 +1,7 @@
 <%- include('../utils/start.ejs',{headerType:'customer'}) %>
+    <link rel="stylesheet" href="/styles/preLogin/inputField.css">
     <link rel="stylesheet" href="/styles/utils/emailVerificationPopUp.css">
-    <link rel="stylesheet" href="/styles/preLogin/customerSignUp.css">
+     <link rel="stylesheet" href="/styles/preLogin/customerSignUp.css">
 </head>
     <body class="customerSignupBody">
         <%- include('../utils/variablesAndMessageBox.ejs') %>
@@ -12,7 +13,6 @@
             <div class="contentWrapper">
                 <div class="pageHeading kanit-medium ">Lets Get Started</div>
                 <div class="formWrapper">
-                    <link rel="stylesheet" href="/styles/preLogin/inputField.css">
                     <form method="post">
                         <%- include('../utils/inputField.ejs',{displayName:'Name',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'customerName',passwordClassName:''}) %>
                         <%- include('../utils/emailVerification.ejs',{isRequired:true,isDisabled:false}) %>
@@ -27,7 +27,7 @@
                         <br>
                     </form>
                 </div>
-                <div class="moreOptionHolder kanit-light">Want to sell with us ? <button class="button-4">Signup as Seller</button></div>
+                <div class="moreOptionHolder kanit-light">Want to sell with us ? <button class="button-4 moreOptionHolderBtn">Signup as Seller</button></div>
             </div>
         </div>
     </body>

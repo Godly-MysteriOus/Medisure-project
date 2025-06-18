@@ -8,6 +8,7 @@ const verifyBtn = document.querySelector('.verifyBtn');
 
 
 regenerateOTPBtn.addEventListener('click',async(e)=>{
+    emailOTPInput.value = '';
     if(!emailPatternValidation()){
         messageDisplayAndHide('Invalid Email Pattern');
         return;

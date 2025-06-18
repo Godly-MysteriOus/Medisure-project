@@ -12,7 +12,8 @@
     height: calc(100% - 3rem);
     display: grid;
     place-items: center;
-    background: linear-gradient(to bottom right, #f5f8fa, #eaf3fb);
+    background-image: url('../../images/customerPage.jpg');
+    background-size: cover;
 }
 .contentWrapper{
     width: 30rem;
@@ -21,10 +22,10 @@
     gap: 1rem;
     padding: 1.5rem 0rem;
     background: linear-gradient(to bottom right, #ffffff, #f1f5ff);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(18px) saturate(180%);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px) saturate(180%);
     -webkit-backdrop-filter: blur(18px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
 }
@@ -40,7 +41,7 @@
 .moreOptionHolder{
     text-align: center;
 }
-.submitBtnHolder{
+.emailSubmitBtnHolder,.submitBtnHolder{
     display: grid;
     place-items: center;
     background: -webkit-linear-gradient(to right, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
@@ -48,7 +49,7 @@
     border-radius: 0.5rem;
     height: fit-content;
 }
-.resetBtnHolder{
+.emailResetBtnHolder,.resetBtnHolder{
     display: grid;
     place-items: center;
     background: #3a6186;  /* fallback for old browsers */
@@ -56,4 +57,27 @@
     background: linear-gradient(to right, #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 0.5rem;
     height: fit-content;
+}
+
+@media screen and (min-width:401px) and (max-width:600px) {
+    .contentWrapper{
+        width: max(23rem,80%);
+    }
+    .moreOptionHolder{
+        font-size: 0.85rem;
+    }
+}
+@media screen and (max-width:400px) {
+    .contentWrapper{
+        width: 90%;
+    }
+    .pageHeading{
+        font-size: 1.25rem;
+    }
+    .resetBtnHolder button,.submitBtnHolder button{
+        font-size: 0.65rem;
+    }
+    .moreOptionHolder{
+        font-size: 0.8rem;
+    }
 }

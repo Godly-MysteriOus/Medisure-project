@@ -5,18 +5,50 @@
     .emailVerificationButtonHolder{
         display: flex;
         justify-content: space-between;
-        padding: 0.1rem 0.1rem;
+        padding: 0.1rem 0rem;
     }
-
+    .inputAndButtonHolder{
+        min-width: max(9.5rem,60%);
+    }
+    @media screen and (min-width:401px) and (max-width:600px) {
+        .fieldName{
+            font-size: 0.7rem;
+            width: 30%;
+        }
+        .emailSubmitBtnHolder button,.emailResetBtnHolder button{
+            font-size: 0.6rem;
+        }
+        .inputAndButtonHolder{
+            min-width: max(9.5rem,65%);
+        }
+    }
+    @media screen and (max-width:400px) {
+        .fieldName{
+            font-size: 0.7rem;
+            width: 25%;
+        }
+        .inputAndButtonHolder{
+            min-width: max(9.5rem,70%);
+        }
+        .emailSubmitBtnHolder button,.emailResetBtnHolder button{
+            font-size: 0.6rem;
+        }
+    }
+    input:-webkit-autofill,input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s !important;
+        -webkit-text-fill-color: #000 !important;
+        caret-color: #000 !important;
+    }
 </style>
 <div class="fieldWrapper">
     <div class="fieldName">Email Id <% if (isRequired) { %><span class="required">*</span><% } %></div>
     <div class="inputAndButtonHolder">
         <div class="emailInputHolder">
-            <input type="email" class="emailIdToVerify" <% if (isRequired) { %> required <% } %> <% if (isDisabled) { %>disabled<% } %>></div>
+            <input type="email" class="emailIdToVerify" <% if (isRequired) { %> required <% } %> <% if (isDisabled) { %>disabled<% } %>>
+        </div>
         <div class="emailVerificationButtonHolder">
-            <div class="resetBtnHolder"><button type="button" class="emailResetBtn button-5-small">Change EmailId</button> </div>
-            <div class="submitBtnHolder"><button class="emailSubmitButton button-5-small" type="button">Verify</button></div>
+            <div class="emailResetBtnHolder"><button type="button" class="emailResetBtn button-5-small">Change Email Id</button> </div>
+            <div class="emailSubmitBtnHolder"><button class="emailSubmitButton button-5-small" type="button">Verify</button></div>
         </div>
     </div>
 </div>

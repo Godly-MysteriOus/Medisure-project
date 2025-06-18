@@ -1,5 +1,5 @@
 const path = require('path');
-const dirName = path.join(__dirname).split('medisure\\')[1];
+const dirName = path.join(__dirname).split(/medisure[\\/]/)[1];
 const fileName = path.basename(__filename);
 const logger = require('../../utils/Logger/logger')(`${dirName}\\${fileName}`);
 const {validationResult} = require('express-validator');

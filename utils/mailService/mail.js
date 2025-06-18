@@ -2,9 +2,9 @@ const axios = require('axios');
 const credential = require('../../config');
 const apiKey = credential.emailAPIKey;
 const path = require('path');
-const fileName = path.basename(__filename);
-const dirName = path.join(__dirname).split(/medisure[\\/]/)[1];
-const logger = require('../Logger/logger')(`${dirName}\\${fileName}`);
+const projectRoot = path.resolve(__dirname, '../');
+const filePathRelativeToRoot = path.relative(projectRoot, __filename);
+const Logger = require('../Logger/logger')(filePathRelativeToRoot);
 exports.sendMail = (emailId,otp)=>{
     Logger.debug('Inside sendMail method!!!');
     Logger.debug('Sending mail to '+emailId);

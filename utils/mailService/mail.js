@@ -3,8 +3,8 @@ const credential = require('../../config');
 const apiKey = credential.emailAPIKey;
 const path = require('path');
 const fileName = path.basename(__filename);
-const dirName = path.join(__dirname).split('medisure\\')[1];
-const Logger = require('../Logger/logger')(dirName+"/"+fileName);
+const dirName = path.join(__dirname).split(/medisure[\\/]/)[1];
+const logger = require('../utils/Logger/logger')(`${dirName}\\${fileName}`);
 exports.sendMail = (emailId,otp)=>{
     Logger.debug('Inside sendMail method!!!');
     Logger.debug('Sending mail to '+emailId);

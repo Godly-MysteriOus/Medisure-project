@@ -1,7 +1,7 @@
 const path = require('path');
-const dirName = path.join(__dirname).split(/medisure[\\/]/)[1];
-const fileName = path.basename(__filename);
-const logger = require('../../utils/Logger/logger')(`${dirName}\\${fileName}`);
+const projectRoot = path.resolve(__dirname, '../');
+const filePathRelativeToRoot = path.relative(projectRoot, __filename);
+const logger = require('../../utils/Logger/logger')(filePathRelativeToRoot);
 const {validationResult} = require('express-validator');
 
 exports.getCustomerSignupPage = (req,res,next)=>{

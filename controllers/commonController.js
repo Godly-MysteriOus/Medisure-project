@@ -1,9 +1,9 @@
 
 const {validationResult} = require('express-validator');
 const path = require('path');
-const fileName = path.basename(__filename);
-const dirName = path.dirname(__filename).split(/medisure[\\/]/)[1];
-const logger = require('../utils/Logger/logger')(`${dirName}\\${fileName}`);
+const projectRoot = path.resolve(__dirname, '../');
+const filePathRelativeToRoot = path.relative(projectRoot, __filename);
+const logger = require('../utils/Logger/logger')(filePathRelativeToRoot);
 const newsLetterDB = require('../models/newsLetter');
 const userQueriesDB = require('../models/userQueries');
 const mailService = require('../utils/mailService/mail');

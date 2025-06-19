@@ -126,7 +126,7 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
     const OTP = String(Math.floor(Math.random()*1000000000)).replaceAll('0','').slice(0,5);
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        logger.error('Validation Errors inside postEmailOTPGeneration method !',errors.array());
+        logger.error('Validation Errors inside postEmailOTPGeneration method !'+errors.array()[0].msg);
         res.status(400).json({
             success:false,
             message : errors.array()[0],
@@ -156,7 +156,7 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
             });
        }
     }catch(e){
-        logger.error('Error inside postEmailOTPGeneration method !!!',e);
+        logger.error('Error inside postEmailOTPGeneration method !!!'+e.stack);
         return res.status(400).json({
             success:false,
             message: 'Error Generating OTP',

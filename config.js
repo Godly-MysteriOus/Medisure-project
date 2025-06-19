@@ -5,4 +5,5 @@ module.exports = {
     prodDBConnectionURI : process.env.prodDBConnectionURI,
     sessionSecretKey:process.env.sessionSecretKey,
     hostURI : process.env.hostURI,
+    emailAPIKey : process.env.emailAPI_KEY,
 };

@@ -1,12 +1,14 @@
-const submitBtnHolder = document.querySelector('.submitBtnHolder');
     const emailSubmitButton = document.querySelector('.emailSubmitButton');
-    const emailIdToVerify = document.querySelector('.emailIdToVerify');
+    var emailIdToVerify = document.querySelector('.emailIdToVerify');
     const emailResetBtn = document.querySelector('.emailResetBtn');
     // emailSubmitButton.style.color = 'gold';
     
     //Reset button to remove content
     emailResetBtn.addEventListener('click',()=>{
         emailIdToVerify.value = '';
+        emailIdToVerify.removeAttribute('disabled');
+        emailSubmitButton.removeAttribute('disabled');
+        emailSubmitButton.textContent = 'Verify';
     });
 
     //function to test input data via regex pattern
@@ -20,7 +22,8 @@ const submitBtnHolder = document.querySelector('.submitBtnHolder');
             messageDisplayAndHide('Invalid Email Pattern');
         }
     });
-    submitBtnHolder.addEventListener('click',async(e)=>{
+    emailSubmitButton.addEventListener('click',async(e)=>{
+        emailIdToVerify.setAttribute('disabled',true);
         if(!emailPatternValidation()){
             messageDisplayAndHide('Invalid Email Pattern');
             return;
@@ -33,7 +36,7 @@ const submitBtnHolder = document.querySelector('.submitBtnHolder');
                 'CSRF-Token':csrfToken,
             },
             body:JSON.stringify({
-                emailId : emailIdToVerify.value,
+                emailId : emailIdToVerify.value.trim(),
             }),
         });
         const response = await request.json();
@@ -41,7 +44,9 @@ const submitBtnHolder = document.querySelector('.submitBtnHolder');
             window.location.href = url+response.redirectTo;
         }else{
             messageDisplayAndHide(response.message);
-            showVerificationPopUp();
+            if(response.success){
+                showVerificationPopUp();
+            }
         }
     });
        

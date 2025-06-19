@@ -44,7 +44,9 @@
             window.location.href = url+response.redirectTo;
         }else{
             messageDisplayAndHide(response.message);
-            showVerificationPopUp();
+            if(response.success){
+                showVerificationPopUp();
+            }
         }
     });
        

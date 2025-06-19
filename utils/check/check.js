@@ -28,3 +28,18 @@ exports.basicMessageValidation = (userMessage)=>{
         return true;
     });
 }
+
+exports.passwordValidation = (password)=>{
+    return check(password).custom(val=>{
+        if(val.length<12){
+            throw new Error('Password should be minimum 12 characters long');
+        }else if(!(/[0-9]/.test(val))){
+            throw new Error('Password must contain a number');
+        }else if(!(/[a-z]/.test(val))){
+            throw new Error('Password must contain a lowercase letter');
+        }else if(!(/[A-Z]/.test(val))){
+            throw new Error('Password must contain a uppercase letter');
+        }
+        return true;
+    });
+}

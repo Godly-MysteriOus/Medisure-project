@@ -147,6 +147,7 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
         req.session.OTP = Number(OTP);
         req.session.OTPExpirationTime = new Date(Date.now() + 5 * 60 * 1000);
         req.session.isLoggedIn = false;
+        req.session.isEmailVerified = false;
        await saveSession(req.session);
        logger.debug('OTP generated and stored into session successfully');
        const mailResult = await mailService.sendMail(emailId,Number(OTP));
@@ -172,7 +173,7 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
     }
 };
 
-exports.emailOTPVerification = (req,res,next)=>{
+exports.emailOTPVerification = async(req,res,next)=>{
     logger.info('Inside emailOTPVerification method !!!');
     const result = new Result();
     const {otp} = req.body;
@@ -184,6 +185,8 @@ exports.emailOTPVerification = (req,res,next)=>{
             if(req.session?.OTP == otp){
                 delete req.session.OTP;
                 delete req.session.OTPExpirationTime;
+                req.session.isEmailVerified = true;
+                await saveSession(req.session);
                 logger.debug('Email OTP Verified Successfully');
                 result.setSuccess(true);
                 result.setMessage('Verified Email Successfully');

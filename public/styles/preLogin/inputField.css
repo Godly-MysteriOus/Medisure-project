@@ -32,7 +32,7 @@
 
 @media screen and (min-width:401px) and (max-width:600px) {
     .fieldName{
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         width: 30%;
     }
     .inputHolder{
@@ -44,7 +44,7 @@
 }
 @media screen and (max-width:400px) {
     .fieldName{
-        font-size: 0.7rem;
+        font-size: 0.75rem;
         width: 25%;
     }
     .inputHolder{

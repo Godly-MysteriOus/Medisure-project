@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt');
 const Result = require('../../classes/result');
 const {ObjectId} = require('mongodb');
 const DB_Names = require('../../DB_Utils/DBNames');
+const generalFunctions = require('../../utils/generalFunctions');
 exports.getCustomerSignupPage = (req,res,next)=>{
     logger.info('Inside getCustomerSignupPage method !!!');
     try{
@@ -71,7 +72,7 @@ exports.addCustomer = async(req,res,next)=>{
             throw new Error('Error Registering User');
         }
         logger.debug('Entry made into login_info DB Successfully !!!');
-        let userDetail = await customerInfoDB.create([{customerName:customerName,emailId:new ObjectId(loginDetail._id),mobileNumber:customerMobileNumber,password:new ObjectId(loginDetail._id),cart:{items:[],totalPrice:0},createdAt:new Date(),isDeleted:0}],{session:transactionSession});
+        let userDetail = await customerInfoDB.create([{customerName:customerName,emailId:new ObjectId(loginDetail._id),mobileNumber:customerMobileNumber,password:new ObjectId(loginDetail._id),cart:{items:[],totalPrice:0},createdAt:generalFunctions.IndianStandardTime(0),isDeleted:0}],{session:transactionSession});
         userDetail = userDetail.pop();
         logger.debug('Entry made into customer_info DB Successfully');
         if(!userDetail){
@@ -81,12 +82,12 @@ exports.addCustomer = async(req,res,next)=>{
         }
         loginDetail.entityObject = userDetail._id;
         loginDetail.entityModel = DB_Names.userRegistrationDB;
-        await loginDetail.save();
-        logger.debug('User Created successfully with emailId : '+customerEmailId+" at time : "+userDetail.createdAt);
         logger.debug('Clearing session items');
         delete req.session.emailId;
         delete req.session.isEmailVerified;
         logger.debug('Cleared session items successfully !!!');
+        await loginDetail.save();
+        logger.debug('User Created successfully with emailId : '+customerEmailId+" at time : "+userDetail.createdAt);
         await transactionSession.commitTransaction();
         res.status(200).json({
             success:true,

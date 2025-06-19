@@ -9,6 +9,7 @@ const userQueriesDB = require('../models/userQueries');
 const mailService = require('../utils/mailService/mail');
 const mongoose = require('mongoose');
 const Result = require('../classes/result');
+const generalFunctions = require('../utils/generalFunctions');
 
 exports.postSubscriptionToNewsLetter = async(req,res,next)=>{ 
     const result = new Result();
@@ -63,17 +64,7 @@ exports.postSubscriptionToNewsLetter = async(req,res,next)=>{
         });
     }
 }
-function IndianStandardTime(){
-    logger.info('Inside IndianStandardTime method!!!');
-    const nowUTC = new Date();
-    let nowIST;
-    if(nowUTC.toString().includes('Indian Standard Time')){
-        nowIST = nowUTC;
-    }else{
-        nowIST = new Date(nowUTC.getTime()+(5.5*60*60*1000));
-    }
-    return nowIST;
-}
+
 exports.postUserQueries = async(req,res,next)=>{
     logger.info('Inside commonController file,postUserQueries method !!!');
     const {emailId,mobileNo,message} = req.body;
@@ -88,7 +79,7 @@ exports.postUserQueries = async(req,res,next)=>{
     const transactionSession = await mongoose.startSession();
     try{
         transactionSession.startTransaction();
-        const isSaved = userQueriesDB.create([{emailId:emailId,mobileNo:mobileNo,message:message,raisedTime:IndianStandardTime(),status:'NEW'}],{session:transactionSession});
+        const isSaved = userQueriesDB.create([{emailId:emailId,mobileNo:mobileNo,message:message,raisedTime:generalFunctions.IndianStandardTime(0),status:'NEW'}],{session:transactionSession});
         if(!isSaved){
             logger.debug('Raising Request Failed, error saving data into the database');
             throw new Error('Raising Request Failed');
@@ -145,7 +136,7 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
     try{
         req.session.emailId = emailId;
         req.session.OTP = Number(OTP);
-        req.session.OTPExpirationTime = new Date(Date.now() + 5 * 60 * 1000);
+        req.session.OTPExpirationTime = generalFunctions.IndianStandardTime(5*60*1000);
         req.session.isLoggedIn = false;
         req.session.isEmailVerified = false;
        await saveSession(req.session);

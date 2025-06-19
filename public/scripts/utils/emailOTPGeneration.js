@@ -1,5 +1,5 @@
     const emailSubmitButton = document.querySelector('.emailSubmitButton');
-    const emailIdToVerify = document.querySelector('.emailIdToVerify');
+    var emailIdToVerify = document.querySelector('.emailIdToVerify');
     const emailResetBtn = document.querySelector('.emailResetBtn');
     // emailSubmitButton.style.color = 'gold';
     

@@ -13,7 +13,7 @@
             <div class="contentWrapper">
                 <div class="pageHeading kanit-medium ">Lets Get Started</div>
                 <div class="formWrapper">
-                    <form method="post">
+                    <form >
                         <%- include('../utils/inputField.ejs',{displayName:'Name',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'customerName',passwordClassName:''}) %>
                         <%- include('../utils/emailVerification.ejs',{isRequired:true,isDisabled:false}) %>
                         <%- include('../utils/inputField.ejs',{displayName:'Password',isRequired:true,isTextArea:false,isDisabled:false,inputType:'password',className:'customerPassword',passwordClassName:'passwordViewImage'}) %>
@@ -22,12 +22,18 @@
                         <br>
                         <div class="buttonHolder">
                             <div class="resetBtnHolder"><button class="button-5" type="reset">Reset</button></div>
-                            <div class="submitBtnHolder"><button class="button-5">Submit</button></div>
+                            <div class="submitBtnHolder"><button class="button-5 customerSignUpSubmitBtn" type="button">Submit</button></div>
                         </div>
-                        <br>
                     </form>
                 </div>
                 <div class="moreOptionHolder kanit-light">Want to sell with us ? <button class="button-4 moreOptionHolderBtn">Signup as Seller</button></div>
+            </div>
+            <div class="passwordNote kanit-regular">
+                <u>Note</u>
+                <ul>
+                    <li>Password should be 12 characters long</li>
+                    <li>Password should contain a number, an uppercase, lowercase letter</li>
+                </ul>
             </div>
         </div>
     </body>

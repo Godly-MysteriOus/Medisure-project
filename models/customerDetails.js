@@ -39,7 +39,7 @@ const customer = new Schema({
     },
     isDeleted:{
         type:Boolean,
-        required:ture,
+        required:true,
         default:false,
     }
 });

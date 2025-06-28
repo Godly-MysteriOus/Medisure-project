@@ -111,3 +111,17 @@ exports.addCustomer = async(req,res,next)=>{
         await transactionSession.endSession();
     }
 }
+
+exports.getSellerSignupPage = (req,res,next)=>{
+    logger.info("Inside getSellerSignupPage method !!!");
+    try{
+        logger.debug('Returning seller signup page');
+        return res.status(200).render('preLogin/sellerSignup.ejs',{
+            isLoggedIn : false,
+            landedPage : 'sellerSignupPage',
+        });
+    }catch(err){
+        logger.error('Error inside getSellerSignup method !!!');
+        logger.error(e.stack);
+    }
+}

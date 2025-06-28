@@ -1,0 +1,73 @@
+<%- include('../utils/start.ejs',{headerType:'seller'}) %>
+    <link rel="stylesheet" href="/styles/preLogin/inputField.css">
+    <link rel="stylesheet" href="/styles/utils/emailVerificationPopUp.css">
+    <link rel="stylesheet" href="/styles/preLogin/sellerSignup.css">
+</head>
+<body class="sellerSignupBody">
+    <%- include('../utils/variablesAndMessageBox.ejs') %>
+    <div class="sellerSignUpHeaderHolder">
+        <%- include('../utils/customerHeader.ejs',{isLoggedIn:false,page:landedPage}) %>
+    </div>
+    <div class="mainBody">
+        <%- include('../utils/emailVerificationPopup.ejs') %>
+        <div class="contentWrapper">
+            <div class="pageHeading kanit-medium ">Lets Get Started</div>
+            <form enctype="multipart/form-data">
+                <div class="formView formView--1 ">
+                    <div class="formPartHeader montserrat">Basic Information</div>
+                    <%- include('../utils/inputField.ejs',{displayName:'Name',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'customerName',passwordClassName:''}) %>
+                    <%- include('../utils/emailVerification.ejs',{isRequired:true,isDisabled:false}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'Password',isRequired:true,isTextArea:false,isDisabled:false,inputType:'password',className:'customerPassword',passwordClassName:'passwordViewImage'}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'Re-enter Password',isRequired:true,isTextArea:false,isDisabled:false,inputType:'password',className:'customerRePassword',passwordClassName:'rePasswordViewImage'}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'Mobile Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'number',className:'customerMobileNumber',passwordClassName:''}) %>
+                </div>
+                <div class="formView formView--2 formPageHidden">
+                    <div class="formPartHeader montserrat">Store Registration Details</div>
+                    <%- include('../utils/inputField.ejs',{displayName:'Store Name',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'storeName',passwordClassName:''}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'Drug License Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'drugLicenseNumber',passwordClassName:''}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'GST Regstration Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'gstRegistrationNumber',passwordClassName:''}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'FSSAI License Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'fssaiLicenseNumber',passwordClassName:''}) %>
+                    <%- include('../utils/fileInputField.ejs',{displayName:'Store Logo',isRequired:false,className:'storeLogo',fileType:'image/png, image/jpeg, image/jpg'}) %>
+                </div>
+                <div class="formView formView--3 formPageHidden">
+                    <div class="formPartHeader montserrat">Store Availability</div>
+                    <div class="containerHeader">
+                        <div class="checkBoxHolder">Select</div>
+                        <div class="dayNameHolder">Day</div>
+                        <div class="openingTimeHolder">Opening Time</div>
+                        <div class="closingTimeHolder">Closing Time</div>
+                    </div>
+                    <div class="availabilityHolder">
+                       
+                    </div>
+                    <script>
+                        const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+                        days.forEach(day=>{
+                            const html = ` <div class="dayInfoHolder">
+                                <div class="checkBoxHolder"><input type="checkbox" class="checkboxes" value='${day}' checked></div>
+                                <div class="dayNameHolder">${day}</div>
+                                <div class="openingTimeHolder"><input type="time" value="09:00" id='openTime-${day}'></div>
+                                <div class="closingTimeHolder"><input type="time" value="22:00" id='closeTime-${day}'></div>
+                            </div>`
+                            document.querySelector('.availabilityHolder').insertAdjacentHTML('beforebegin',html);
+                        });
+                    </script>
+                </div>
+                <div class="formView formView--4 formPageHidden">
+                    <%- include('../utils/inputField.ejs',{displayName:'Store Address',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'storeAddress',passwordClassName:''}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'Pincode',isRequired:true,isTextArea:false,isDisabled:false,inputType:'number',className:'pincode',passwordClassName:''}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'City',isRequired:true,isTextArea:false,isDisabled:true,inputType:'text',className:'storeCity',passwordClassName:''}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'State',isRequired:true,isTextArea:false,isDisabled:true,inputType:'text',className:'storeState',passwordClassName:''}) %>
+                </div>
+                <div class="formButtonHolder">
+                    <button class="registrationFormBackBtn resetBtnHolder button-5" type="button">Back</button>
+                    <button class="registrationFormSubmitBtn submitBtnHolder button-5 buttonHidden" type="button">Submit</button>
+                    <button class="registrationFormNextBtn submitBtnHolder button-5" type="button ">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="/scripts/utils/emailOTPGeneration.js"></script>
+<script src="/scripts/utils/emailOTPVerification.js"></script>
+<script src="/scripts/preLogin/sellerSignup.js"></script>

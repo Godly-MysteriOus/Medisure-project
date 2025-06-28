@@ -10,4 +10,5 @@ router.put('/customer',
     ,check.mobileNumberValidation('customerMobileNumber'),
     check.passwordValidation('customerPassword'),
 ],rateLimit(4,60),csrfProtection,signupController.addCustomer);
+router.get('/seller',signupController.getSellerSignupPage)
 module.exports = router;

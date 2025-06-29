@@ -15,11 +15,11 @@
             <form enctype="multipart/form-data">
                 <div class="formView formView--1 ">
                     <div class="formPartHeader montserrat">Basic Information</div>
-                    <%- include('../utils/inputField.ejs',{displayName:'Name',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'customerName',passwordClassName:''}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'Name',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'sellerName',passwordClassName:''}) %>
                     <%- include('../utils/emailVerification.ejs',{isRequired:true,isDisabled:false}) %>
-                    <%- include('../utils/inputField.ejs',{displayName:'Password',isRequired:true,isTextArea:false,isDisabled:false,inputType:'password',className:'customerPassword',passwordClassName:'passwordViewImage'}) %>
-                    <%- include('../utils/inputField.ejs',{displayName:'Re-enter Password',isRequired:true,isTextArea:false,isDisabled:false,inputType:'password',className:'customerRePassword',passwordClassName:'rePasswordViewImage'}) %>
-                    <%- include('../utils/inputField.ejs',{displayName:'Mobile Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'number',className:'customerMobileNumber',passwordClassName:''}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'Password',isRequired:true,isTextArea:false,isDisabled:false,inputType:'password',className:'sellerPassword',passwordClassName:'passwordViewImage'}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'Confirm Password',isRequired:true,isTextArea:false,isDisabled:false,inputType:'password',className:'sellerRePassword',passwordClassName:'rePasswordViewImage'}) %>
+                    <%- include('../utils/inputField.ejs',{displayName:'Mobile Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'number',className:'sellerMobileNumber',passwordClassName:''}) %>
                 </div>
                 <div class="formView formView--2 formPageHidden">
                     <div class="formPartHeader montserrat">Store Registration Details</div>
@@ -30,31 +30,12 @@
                     <%- include('../utils/fileInputField.ejs',{displayName:'Store Logo',isRequired:false,className:'storeLogo',fileType:'image/png, image/jpeg, image/jpg'}) %>
                 </div>
                 <div class="formView formView--3 formPageHidden">
-                    <div class="formPartHeader montserrat">Store Availability</div>
-                    <div class="containerHeader">
-                        <div class="checkBoxHolder">Select</div>
-                        <div class="dayNameHolder">Day</div>
-                        <div class="openingTimeHolder">Opening Time</div>
-                        <div class="closingTimeHolder">Closing Time</div>
-                    </div>
-                    <div class="availabilityHolder">
-                       
-                    </div>
-                    <script>
-                        const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-                        days.forEach(day=>{
-                            const html = ` <div class="dayInfoHolder">
-                                <div class="checkBoxHolder"><input type="checkbox" class="checkboxes" value='${day}' checked></div>
-                                <div class="dayNameHolder">${day}</div>
-                                <div class="openingTimeHolder"><input type="time" value="09:00" id='openTime-${day}'></div>
-                                <div class="closingTimeHolder"><input type="time" value="22:00" id='closeTime-${day}'></div>
-                            </div>`
-                            document.querySelector('.availabilityHolder').insertAdjacentHTML('beforebegin',html);
-                        });
-                    </script>
-                </div>
-                <div class="formView formView--4 formPageHidden">
+                    <div class="formPartHeader montserrat">Store Address</div>
                     <%- include('../utils/inputField.ejs',{displayName:'Store Address',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'storeAddress',passwordClassName:''}) %>
+                    <div class="locateYourStoreHolder fieldWrapper">
+                        <div class="locateYourStoreTextHolder fieldName">Locate Your Store</div>
+                        <div class="inputHolder"><button class="button-5 locateYourStore" type="button">Locate Your Store</button></div>
+                    </div>
                     <%- include('../utils/inputField.ejs',{displayName:'Pincode',isRequired:true,isTextArea:false,isDisabled:false,inputType:'number',className:'pincode',passwordClassName:''}) %>
                     <%- include('../utils/inputField.ejs',{displayName:'City',isRequired:true,isTextArea:false,isDisabled:true,inputType:'text',className:'storeCity',passwordClassName:''}) %>
                     <%- include('../utils/inputField.ejs',{displayName:'State',isRequired:true,isTextArea:false,isDisabled:true,inputType:'text',className:'storeState',passwordClassName:''}) %>
@@ -66,8 +47,16 @@
                 </div>
             </form>
         </div>
+        <div class="passwordNote kanit-regular">
+            <u>Note</u>
+            <ul>
+                <li>Password should be 12 characters long</li>
+                <li>Password should contain a number, an uppercase, lowercase letter</li>
+            </ul>
+        </div>
     </div>
 </body>
 <script src="/scripts/utils/emailOTPGeneration.js"></script>
 <script src="/scripts/utils/emailOTPVerification.js"></script>
 <script src="/scripts/preLogin/sellerSignup.js"></script>
+<script src="/scripts/preLogin/sellerSignup2.js"></script>

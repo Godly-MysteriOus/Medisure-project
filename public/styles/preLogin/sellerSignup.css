@@ -32,7 +32,7 @@
     font-size: 1.5rem;
     text-align: center;
 }
-.emailSubmitBtnHolder,.submitBtnHolder{
+.emailSubmitBtnHolder,.submitBtnHolder,.locateYourStore{
     display: grid;
     place-items: center;
     background: -webkit-linear-gradient(to right, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
@@ -81,4 +81,35 @@
 }
 .openingTimeHolder,.closingTimeHolder{
     width: 20%;
+}
+.passwordNote{
+    font-size: .8rem;
+    margin-top: -2rem;
+}
+
+@media screen and (min-width:401px) and (max-width:600px) {
+    .contentWrapper{
+        width: max(23rem,80%);
+    }
+    .passwordNote{
+        width: max(20rem,70%);
+    }
+}
+@media screen and (max-width:400px) {
+    .contentWrapper{
+        width: 90%;
+    }
+    .pageHeading{
+        font-size: 1.25rem;
+    }
+    .resetBtnHolder button,.submitBtnHolder button{
+        font-size: 0.65rem;
+    }
+    .formPartHeader{
+        font-size: 0.8rem;
+    }
+    .passwordNote{
+        width:80%;
+        font-size: 0.7rem;
+    }
 }

@@ -43,3 +43,11 @@ exports.passwordValidation = (password)=>{
         return true;
     });
 }
+exports.pincodeValidation = (pincode)=>{
+    return check(pincode).custom(val=>{
+        if(val.trim().length!=6){
+            throw new Error('Pincode must be a 6 digit number');
+        }
+        return true;
+    });
+}

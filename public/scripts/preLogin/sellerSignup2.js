@@ -110,7 +110,32 @@ function fssaiValidation(){
         return;
     }
 };
-
+pincode.addEventListener('input',async()=>{
+    if(pincode.value.length==6){
+        const csrfToken = await getCsrfToken();
+        const request = await fetch(url+`common/pincode-location`,{
+            method:'POST',
+            headers:{'Content-Type':'application/json','CSRF-Token':csrfToken},
+            body: JSON.stringify({
+                pincode : pincode.value,
+            }),
+            signal: AbortSignal.timeout(5000),
+        });
+        const response = await request.json();
+        if(response.success){
+            const {state,city} = response.data;
+            storeCity.value = city;
+            storeState.value = state;
+        }else{
+            messageDisplayAndHide(response.message);
+        }
+    }else if(pincode.value.length>6){
+        pincode.value = pincode.value.substr(0,6);
+    }else{
+        storeCity.value = '';
+        storeState.value = '';
+    }
+})
 sellerName.addEventListener('blur',()=>{
     nameValidation(sellerName.value,'Invalid Seller Name Format');
 });
@@ -137,3 +162,43 @@ fssaiLicenseNumber.addEventListener('blur',()=>{
     fssaiValidation();
 });
 
+registrationFormSubmitBtn.addEventListener('click',async(e)=>{
+    nameValidation(sellerName.value,'Invalid Seller Name Format');
+    passwordValidation();
+    confirmPasswordValidation();
+    mobileNumberValidation();
+    nameValidation(storeName.value,'Invalid Store Name Format');
+    validateDrugLicenseNumber();
+    gstValidation();
+    fssaiValidation();
+    if(pincode.value.trim()!=6){
+        messageDisplayAndHide('Invalid Pincode');
+        return;
+    };
+    if(!emailPatternValidation()){
+        messageDisplayAndHide('Invalid Email Pattern');
+        return;
+    }
+    const formData = new FormData();
+    formData.append('sellerName',sellerName.value);
+    formData.append('sellerEmail',emailIdToVerify.value);
+    formData.append('sellerPassword',sellerPassword.value);
+    formData.append('sellerMobileNumber',sellerMobileNumber.value);
+    formData.append('storeName',storeName.value);
+    formData.append('drugLicenseNumber',drugLicenseNumber.value);
+    formData.append('gstNumber',gstRegistrationNumber.value);
+    formData.append('fssaiNumber',fssaiLicenseNumber.value);
+    formData.append('storeAddress',storeAddress.value);
+    formData.append('storePincode',pincode.value);
+    formData.append('storeLogo',storeLogo.files[0]);
+    formData.append('storeLogo',storeLogo.files[1]);
+    console.log(url+'signup/seller');
+    const csrfToken = await getCsrfToken();
+    const request = await fetch(url+'signup/seller',{
+        method: 'POST',
+        body : formData,
+        headers: {'CSRF-Token':csrfToken},
+        signal: AbortSignal.timeout(5000),
+    });
+    const response = await request.json();
+});

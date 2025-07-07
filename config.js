@@ -6,8 +6,7 @@ module.exports = {
     sessionSecretKey:process.env.sessionSecretKey,
     hostURI : process.env.hostURI,
     emailAPIKey : process.env.emailAPI_KEY,
-    backBlazeEndPoint : process.env.backblazeEndPoint,
-    backBlazeAccessKeyId : process.env.backblazeAccessKeyId,
-    backBlazeSecretAccessKey : process.env.backblazeSecretAccessKey,
-    backBlazeRegion : process.env.baxkblazeRegion,
+    cloudinaryCloudName:process.env.cloudinary_cloud_name,
+    cloudinaryApiKey:process.env.cloudinary_api_key,
+    cloudinaryApiSecret : process.env.cloudinary_api_secret,
 };

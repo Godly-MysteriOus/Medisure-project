@@ -10,18 +10,20 @@ const registrationFormSubmitBtn = document.querySelector('.registrationFormSubmi
 
 
 registrationFormNextBtn.addEventListener('click',()=>{
-    i++;
-    if(i<=iMax){
-        formView.forEach(item=>item.classList.add(formPageHidden));
-        document.querySelector(`.formView--${i}`).classList.remove(formPageHidden);
-        if(i==iMax){
+    if(registrationFormNextBtn){
+        i++;
+        if(i<=iMax){
+            formView.forEach(item=>item.classList.add(formPageHidden));
+            document.querySelector(`.formView--${i}`).classList.remove(formPageHidden);
+            if(i==iMax){
+                registrationFormNextBtn.classList.add(buttonHidden);
+                registrationFormSubmitBtn.classList.remove(buttonHidden);
+            }
+        }else{
+            i--;
             registrationFormNextBtn.classList.add(buttonHidden);
-        registrationFormSubmitBtn.classList.remove(buttonHidden);
+            registrationFormSubmitBtn.classList.remove(buttonHidden);
         }
-    }else{
-        i--;
-        registrationFormNextBtn.classList.add(buttonHidden);
-        registrationFormSubmitBtn.classList.remove(buttonHidden);
     }
 });
 registrationFormBackBtn.addEventListener('click',()=>{

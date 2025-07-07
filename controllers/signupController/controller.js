@@ -11,6 +11,8 @@ const Result = require('../../classes/result');
 const {ObjectId} = require('mongodb');
 const DB_Names = require('../../DB_Utils/DBNames');
 const generalFunctions = require('../../utils/generalFunctions');
+const cloudinary = require('../../utils/FileUploads/cloudinary');
+
 exports.getCustomerSignupPage = (req,res,next)=>{
     logger.info('Inside getCustomerSignupPage method !!!');
     try{
@@ -123,5 +125,15 @@ exports.getSellerSignupPage = (req,res,next)=>{
     }catch(err){
         logger.error('Error inside getSellerSignup method !!!');
         logger.error(e.stack);
+    }
+};
+
+
+exports.addSeller = async(req,res,next)=>{
+    logger.info('Inside addSeller method !!!');
+    try{
+        console.log(req.files);  
+    }catch(err){
+
     }
 }

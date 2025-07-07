@@ -211,3 +211,42 @@ exports.emailOTPVerification = async(req,res,next)=>{
         });
     }
 };
+
+exports.pincodeVerificationAndLocationDetails = async(req,res,next)=>{
+    logger.info('Inside pincodeVerificationAndLocationDetails method !!!');
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        logger.debug("Validation errors inside pincodeVerificationAndLocationDetails method.");
+        return res.status(200).json({
+            success:false,
+            message:errors.array()[0],
+        });
+    }
+    const {pincode} = req.body;
+    try{
+        logger.debug('Trying to fetch details via India Post API for pincode : '+pincode);
+        const req = await fetch(`https://api.postalpincode.in/pincode/${pincode}`,{
+            method:'GET',
+            headers:{ 'Content-Type': 'application/json' },
+        });
+        const resp = await req.json();
+        logger.debug('Fetched details successfully');
+        const requiredData = {
+            state : resp[0]["PostOffice"][0].State,
+            city :  resp[0]["PostOffice"][0].District,
+        };
+        logger.debug('For pincode : '+pincode+" state = "+requiredData.state+" city = "+requiredData.city);
+        return res.status(200).json({
+            success:true,
+            message:'Fetched data',
+            data : requiredData,
+        });
+    }catch(e){
+        logger.debug('Error inside pincodeVerificationAndLocationDetails method !!!');
+        logger.debug(e.stack);
+        return res.status(400).json({
+            success:false,
+            message:'Error while fetching Pincode details',
+        });
+    }
+};

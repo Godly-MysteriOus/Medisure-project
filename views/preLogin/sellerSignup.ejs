@@ -27,7 +27,7 @@
                     <%- include('../utils/inputField.ejs',{displayName:'Drug License Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'drugLicenseNumber',passwordClassName:''}) %>
                     <%- include('../utils/inputField.ejs',{displayName:'GST Regstration Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'gstRegistrationNumber',passwordClassName:''}) %>
                     <%- include('../utils/inputField.ejs',{displayName:'FSSAI License Number',isRequired:true,isTextArea:false,isDisabled:false,inputType:'text',className:'fssaiLicenseNumber',passwordClassName:''}) %>
-                    <%- include('../utils/fileInputField.ejs',{displayName:'Store Logo',isRequired:false,className:'storeLogo',fileType:'image/png, image/jpeg, image/jpg'}) %>
+                    <%- include('../utils/fileInputField.ejs',{displayName:'Store Logo',isRequired:false,className:'storeLogo',fileType:'image/png, image/jpeg, image/jpg', isMultiple:false}) %>
                 </div>
                 <div class="formView formView--3 formPageHidden">
                     <div class="formPartHeader montserrat">Store Address</div>

@@ -33,7 +33,7 @@ rePasswordViewImage.addEventListener('click',()=>{
     }
 });
 function nameValidation(val,msg){
-    const regex = /^[a-zA-Z ]$/;
+    const regex = /^[a-zA-Z\s]+$/;
     if(!regex.test(val.trim())){
         messageDisplayAndHide(msg);
         return;
@@ -47,9 +47,9 @@ function mobileNumberValidation(){
     }
 };
 function passwordValidation(){
-    const r1 = /^[0-9]$/;
-    const r2 = /^[a-z]$/;
-    const r3 = /[A-Z]$/;
+    const r1 = /[0-9]+/;
+    const r2 = /[a-z]+/;
+    const r3 = /[A-Z]+/;
     const val = sellerPassword.value;
     if(val.length<12){
         messageDisplayAndHide('Password should be atleast 12 characters long');
@@ -171,7 +171,7 @@ registrationFormSubmitBtn.addEventListener('click',async(e)=>{
     validateDrugLicenseNumber();
     gstValidation();
     fssaiValidation();
-    if(pincode.value.trim()!=6){
+    if(pincode.value.trim().length!=6){
         messageDisplayAndHide('Invalid Pincode');
         return;
     };
@@ -191,8 +191,6 @@ registrationFormSubmitBtn.addEventListener('click',async(e)=>{
     formData.append('storeAddress',storeAddress.value);
     formData.append('storePincode',pincode.value);
     formData.append('storeLogo',storeLogo.files[0]);
-    formData.append('storeLogo',storeLogo.files[1]);
-    console.log(url+'signup/seller');
     const csrfToken = await getCsrfToken();
     const request = await fetch(url+'signup/seller',{
         method: 'POST',
@@ -201,4 +199,5 @@ registrationFormSubmitBtn.addEventListener('click',async(e)=>{
         signal: AbortSignal.timeout(5000),
     });
     const response = await request.json();
+    messageDisplayAndHide(response.message);
 });

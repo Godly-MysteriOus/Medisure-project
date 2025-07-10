@@ -1,7 +1,7 @@
 <div class="fieldWrapper">
     <div class="fieldName"><%= displayName %> <% if (isRequired) { %><span class="required">*</span><% } %></div>
     <div class="inputHolder">
-        <input type="file" accept="<%= fileType %>" class="<%= className %>" <% if (isRequired) { %>required<% } %>>
+        <input type="file"  <% if (isMultiple) { %> multiple <% } %> accept="<%= fileType %>" class="<%= className %>" <% if (isRequired) { %>required<% } %>>
     </div>
 </div>
 <!-- 
@@ -9,4 +9,5 @@
     isRequired
     className
     fileType
+    isMultiple
 -->

@@ -53,7 +53,7 @@ exports.pincodeValidation = (pincode)=>{
 }
 exports.nameValidation = (name,msg)=>{
     return check(name).custom(val=>{
-        const regex = /^[a-zA-Z ]$/;
+        const regex = /^[a-zA-Z\s]+$/;
         if(!regex.test(val.trim())){
             throw new Error(msg);
         }
@@ -86,9 +86,9 @@ exports.drugLicenseNumberValidation = (number)=>{
 }
 exports.gstValidation = (number)=>{
     return check(number).custom(val=>{
-         const gstRegex = /^([0][1-9]|[1-3][0-9])[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z][Z][A-Z0-9]$/;
-        if(!gstRegex.test(gstRegistrationNumber.value.trim())){
-            throw new Wrror('Invalid GST Number');
+        const gstRegex = /^([0][1-9]|[1-3][0-9])[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z][Z][A-Z0-9]$/;
+        if(!gstRegex.test(val.trim())){
+            throw new Error('Invalid GST Number');
         }
         return true;
     })
@@ -96,7 +96,7 @@ exports.gstValidation = (number)=>{
 exports.fssaiNumberValidation = (fssaiNumber)=>{
     return check(fssaiNumber).custom(val=>{
         const fssaiRegex = /^[1-2]([0][1-9]|[1-2][0-9]|3[0-5])[0-9]{2}[0-9]{2}[0-9]{7}$/;
-        if(!fssaiRegex.test(fssaiLicenseNumber.value.trim())){
+        if(!fssaiRegex.test(val.trim())){
             throw new Error('Invalid FSSAI Number');
         }
         return true;
@@ -109,7 +109,7 @@ exports.imageFileValidation = (file)=>{
             throw new Error(`${file} is required`);
         }; // Ensure file exists
         const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-        if (!allowedTypes.includes(req.files[`${file}`][0].mimetype)) {
+        if (!allowedTypes.includes(req.files[0].mimetype)) {
             throw new Error("Only JPG, PNG, and JPEG files are allowed");
         }
         return true;

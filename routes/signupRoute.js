@@ -13,7 +13,7 @@ router.put('/customer',
     check.passwordValidation('customerPassword'),
 ],rateLimit(4,60),csrfProtection,signupController.addCustomer);
 router.get('/seller',signupController.getSellerSignupPage);
-router.post('/seller',
+router.post('/seller',upload.array('storeLogo'),
     [check.nameValidation('sellerName','Invalid Seller Name String'),
      check.emailValidation('sellerEmail'),
      check.passwordValidation('sellerPassword'),
@@ -21,8 +21,9 @@ router.post('/seller',
      check.drugLicenseNumberValidation('drugLicenseNumber'),
      check.gstValidation('gstNumber'),
      check.fssaiNumberValidation('fssaiNumber'),
+     check.imageFileValidation('storeLogo'),
      check.pincodeValidation('storePincode')
     ],
-   upload.array('storeLogo'), rateLimit(5,10),csrfProtection,signupController.addSeller
+   rateLimit(5,10),csrfProtection,signupController.addSeller
 )
 module.exports = router;

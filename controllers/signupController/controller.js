@@ -47,17 +47,17 @@ exports.addCustomer = async(req,res,next)=>{
     logger.info('Inside addCustomer method !!!');
     const error = validationResult(req);
     if(!error.isEmpty()){
-        logger.debug('Error during validation '+error.array()[0].msg);;
+        logger.debug('Error during validation '+error.array()[0].msg);
         return res.status(400).json({
             success:false,
-            message : error.array()[0],
+            message : error.array()[0].msg,
         });
     }
 
     const {customerName,customerEmailId,customerPassword,customerMobileNumber} = req.body;
     const result = new Result();
     let transactionSession = await mongoose.startSession();
-    transactionSession.startTransaction();;
+    transactionSession.startTransaction();
     const resultArr = [];
     try{
         if(!req.session.isEmailVerified){
@@ -76,16 +76,16 @@ exports.addCustomer = async(req,res,next)=>{
         const hashedPassword = await bcrypt.hash(customerPassword,12);
         logger.debug('Hashed password successfully!!!');
 
-        const creationTime = generalFunctions.IndianStandardTime(0);
+        const creationTime = generalFunctions.IndianStandardTime(0).toString().split(' ');
         const auditCol = {
-            createdAt : creationTime[0],
-            createTime : creationTime[1],
+            createdAt : Date(creationTime),
+            createTime : creationTime[4],
             updatedAt : null,
             updateTime: null,
             isDeleted : false,
         }
 
-        let loginDetail = await loginInfoDB.create([{emailId:customerEmailId,password:hashedPassword,roleId:1,audit:auditCol}],{session:transactionSession});
+        let loginDetail = await loginInfoDB.create([{emailId:customerEmailId,password:hashedPassword,mobileNo:customerMobileNumber,roleId:1,audit:auditCol}],{session:transactionSession});
         loginDetail = loginDetail.pop();
         if(!loginDetail){
             logger.error('Unable to save data in login_info DB');
@@ -94,7 +94,7 @@ exports.addCustomer = async(req,res,next)=>{
         }
         logger.debug('Entry made into login_info DB Successfully !!!');
         
-        let userDetail = await customerInfoDB.create([{customerName:customerName,emailId:new ObjectId(loginDetail._id),mobileNumber:customerMobileNumber,password:new ObjectId(loginDetail._id),cart:{items:[],totalPrice:0},audit:auditCol}],{session:transactionSession});
+        let userDetail = await customerInfoDB.create([{customerName:customerName,emailId:new ObjectId(loginDetail._id),mobileNumber:new Object(loginDetail._id),password:new ObjectId(loginDetail._id),cart:{items:[],totalPrice:0},audit:auditCol}],{session:transactionSession});
         userDetail = userDetail.pop();
         logger.debug('Entry made into customer_info DB Successfully');
         if(!userDetail){

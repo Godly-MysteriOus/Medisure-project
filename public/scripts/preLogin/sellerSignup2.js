@@ -192,12 +192,34 @@ registrationFormSubmitBtn.addEventListener('click',async(e)=>{
     formData.append('storePincode',pincode.value);
     formData.append('storeLogo',storeLogo.files[0]);
     const csrfToken = await getCsrfToken();
+    registrationFormSubmitBtn.setAttribute('disabled',true);
     const request = await fetch(url+'signup/seller',{
         method: 'POST',
         body : formData,
         headers: {'CSRF-Token':csrfToken},
-        signal: AbortSignal.timeout(5000),
+        signal: AbortSignal.timeout(10000),
     });
     const response = await request.json();
+    registrationFormSubmitBtn.removeAttribute('disabled');
     messageDisplayAndHide(response.message);
+    if(response.success){
+        sellerName.value = '';
+        emailIdToVerify.value = '';
+        sellerPassword.value = '';
+        sellerRePassword.value = '';
+        sellerMobileNumber.value = '';
+        storeName.value = '';
+        drugLicenseNumber.value = '';
+        gstRegistrationNumber.value = '';
+        fssaiLicenseNumber.value = '';
+        storeLogo.value = '';
+        storeAddress.value = '';
+        pincode.value = '';
+        storeState.value = '';
+        storeCity.value = '';
+        const timer = setTimeout(()=>{
+            window.location.href = url+'login';
+            clearTimeout(timer);
+        },2500);
+    }
 });

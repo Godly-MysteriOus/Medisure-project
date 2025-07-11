@@ -15,7 +15,8 @@ const customer = new Schema({
         required:true,
     },
     mobileNumber:{
-        type:Number,
+        type:Schema.Types.ObjectId,
+        ref : dbNames.loginInfoDB,
         required:true,
     },
     password:{

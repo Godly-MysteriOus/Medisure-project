@@ -225,16 +225,9 @@ exports.pincodeVerificationAndLocationDetails = async(req,res,next)=>{
     const {pincode} = req.body;
     try{
         logger.debug('Trying to fetch details via India Post API for pincode : '+pincode);
-        const req = await fetch(`https://api.postalpincode.in/pincode/${pincode}`,{
-            method:'GET',
-            headers:{ 'Content-Type': 'application/json' },
-        });
-        const resp = await req.json();
+        const requiredData = await exports.IndiaPost(pincode);
         logger.debug('Fetched details successfully');
-        const requiredData = {
-            state : resp[0]["PostOffice"][0].State,
-            city :  resp[0]["PostOffice"][0].District,
-        };
+        
         logger.debug('For pincode : '+pincode+" state = "+requiredData.state+" city = "+requiredData.city);
         return res.status(200).json({
             success:true,
@@ -250,3 +243,21 @@ exports.pincodeVerificationAndLocationDetails = async(req,res,next)=>{
         });
     }
 };
+exports.IndiaPost = async(pincode)=>{
+    let resp;
+    let requiredData;
+    try{
+        const req = await fetch(`https://api.postalpincode.in/pincode/${pincode}`,{
+            method:'GET',
+            headers:{ 'Content-Type': 'application/json' },
+        });
+        resp = await req.json();
+        requiredData = {
+            state : resp[0]["PostOffice"][0].State,
+            city :  resp[0]["PostOffice"][0].District,
+        };
+    }catch(err){
+        throw new Error(err);
+    }
+    return requiredData;
+}

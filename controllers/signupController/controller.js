@@ -15,6 +15,7 @@ const generalFunctions = require('../../utils/generalFunctions');
 const fileUpload = require('../../utils/FileUploads/fileUpload');
 const config = require('../../config');
 const {cloudinary} = require('../../utils/FileUploads/cloudinary');
+const commonController = require('../commonController');
 /**
  * This method returns a renderable customer Signup page
  * @param {*} req 
@@ -159,17 +160,9 @@ exports.getSellerSignupPage = (req,res,next)=>{
  */
 async function getLocationDetails(storePincode){
     logger.info('Inside getLocationDetails method');
-    const request = await fetch(config.hostURI+'common/pincode',{
-        method : 'POST',
-        signal : AbortSignal.timeout(5000),
-        headers : {'Content-Type':'application/json'},
-        body: JSON.stringify({
-            pincode : storePincode,
-        }),
-    });
-    const response = await request.json();
+    const requiredData = commonController.IndiaPost(storePincode);
     logger.debug('Returning response from India Post API');
-    return response.data;
+    return requiredData;
 }
 /**
  * This method sets object used to save seller info into the db

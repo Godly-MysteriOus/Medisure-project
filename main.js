@@ -15,7 +15,7 @@ app.set('views', 'views');
 app.set('trust proxy', 1);
 // Setting up CORS policies
 app.use(cors({
-    origin: '*', // Replace with your front-end URL
+    origin: config.hostURI, // Replace with your front-end URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true // Allow cookies if necessary
 }));

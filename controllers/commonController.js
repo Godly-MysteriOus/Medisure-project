@@ -1,13 +1,15 @@
 
 const {validationResult} = require('express-validator');
 const path = require('path');
-const fileName = path.basename(__filename);
-const dirName = path.dirname(__filename).split(/[/\\]/).pop();
-const logger = require('../utils/Logger/logger')(dirName+'/'+fileName);
+const projectRoot = path.resolve(__dirname, '../');
+const filePathRelativeToRoot = path.relative(projectRoot, __filename);
+const logger = require('../utils/Logger/logger')(filePathRelativeToRoot);
 const newsLetterDB = require('../models/newsLetter');
 const userQueriesDB = require('../models/userQueries');
+const mailService = require('../utils/mailService/mail');
 const mongoose = require('mongoose');
 const Result = require('../classes/result');
+const generalFunctions = require('../utils/generalFunctions');
 
 exports.postSubscriptionToNewsLetter = async(req,res,next)=>{ 
     const result = new Result();
@@ -62,17 +64,7 @@ exports.postSubscriptionToNewsLetter = async(req,res,next)=>{
         });
     }
 }
-function IndianStandardTime(){
-    logger.info('Inside IndianStandardTime method!!!');
-    const nowUTC = new Date();
-    let nowIST;
-    if(nowUTC.toString().includes('Indian Standard Time')){
-        nowIST = nowUTC;
-    }else{
-        nowIST = new Date(nowUTC.getTime()+(5.5*60*60*1000));
-    }
-    return nowIST;
-}
+
 exports.postUserQueries = async(req,res,next)=>{
     logger.info('Inside commonController file,postUserQueries method !!!');
     const {emailId,mobileNo,message} = req.body;
@@ -87,7 +79,7 @@ exports.postUserQueries = async(req,res,next)=>{
     const transactionSession = await mongoose.startSession();
     try{
         transactionSession.startTransaction();
-        const isSaved = userQueriesDB.create([{emailId:emailId,mobileNo:mobileNo,message:message,raisedTime:IndianStandardTime(),status:'NEW'}],{session:transactionSession});
+        const isSaved = userQueriesDB.create([{emailId:emailId,mobileNo:mobileNo,message:message,raisedTime:generalFunctions.IndianStandardTime(0),status:'NEW'}],{session:transactionSession});
         if(!isSaved){
             logger.debug('Raising Request Failed, error saving data into the database');
             throw new Error('Raising Request Failed');
@@ -134,7 +126,7 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
     const OTP = String(Math.floor(Math.random()*1000000000)).replaceAll('0','').slice(0,5);
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        logger.error('Validation Errors inside postEmailOTPGeneration method !',errors.array());
+        logger.error('Validation Errors inside postEmailOTPGeneration method !'+errors.array()[0].msg);
         res.status(400).json({
             success:false,
             message : errors.array()[0],
@@ -144,19 +136,128 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
     try{
         req.session.emailId = emailId;
         req.session.OTP = Number(OTP);
-        req.session.OTPExpirationTime = new Date(Date.now() + 5 * 60 * 1000);
+        req.session.OTPExpirationTime = generalFunctions.IndianStandardTime(5*60*1000);
         req.session.isLoggedIn = false;
+        req.session.isEmailVerified = false;
        await saveSession(req.session);
        logger.debug('OTP generated and stored into session successfully');
-        return res.status(200).json({
-            success:true,
-            message:'OTP Sent Successfully!',
-        });
+       const mailResult = await mailService.sendMail(emailId,Number(OTP));
+       if(mailResult){
+            logger.debug('Mail Send Successfully');
+           return res.status(200).json({
+               success:true,
+               message:'OTP Sent Successfully!',
+           });
+       }else{
+            logger.debug('Error Sending mail');
+            return res.status(400).json({
+                success:false,
+                message:'Could not send OTP, Try again later',
+            });
+       }
     }catch(e){
-        logger.error('Error inside postEmailOTPGeneration method !!!',e);
+        logger.error('Error inside postEmailOTPGeneration method !!!'+e.stack);
         return res.status(400).json({
             success:false,
             message: 'Error Generating OTP',
         });
     }
+};
+
+exports.emailOTPVerification = async(req,res,next)=>{
+    logger.info('Inside emailOTPVerification method !!!');
+    const result = new Result();
+    const {otp} = req.body;
+    try{
+        const nowDate = new Date();
+        logger.debug('Checking whether OTP is expired or not');
+        if(req.session?.OTPExpirationTime > nowDate){
+            logger.debug('OTP didn\'t crossed expiration time');
+            if(req.session?.OTP == otp){
+                delete req.session.OTP;
+                delete req.session.OTPExpirationTime;
+                req.session.isEmailVerified = true;
+                await saveSession(req.session);
+                logger.debug('Email OTP Verified Successfully');
+                result.setSuccess(true);
+                result.setMessage('Verified Email Successfully');
+            }else{
+                logger.debug('Wrong OTP');
+                result.setSuccess(false);
+                result.setMessage('Invalid OTP');
+            }
+        }else{
+            logger.debug('Email OTP Expired');
+            result.setSuccess(false);
+            result.setMessage('Email OTP Expired, Regenerate OTP');
+        }
+        logger.debug('Returning result, result: '+result.getMessage()+" success: "+result.getSuccess());
+        if(result.getSuccess()==false){
+            res.status(400).json({
+                success:result.getSuccess(),
+                message:result.getMessage(),
+            });
+        }else{
+            res.status(200).json({
+                success:result.getSuccess(),
+                message : result.getMessage(),
+            });
+        }
+    }catch(err){
+        logger.error('Error inside emailOTPVerification method!!!'+err);
+        return res.status(400).json({
+            success:false,
+            message: 'Error Verifying OTP, Try again later',
+        });
+    }
+};
+
+exports.pincodeVerificationAndLocationDetails = async(req,res,next)=>{
+    logger.info('Inside pincodeVerificationAndLocationDetails method !!!');
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        logger.debug("Validation errors inside pincodeVerificationAndLocationDetails method.");
+        return res.status(200).json({
+            success:false,
+            message:errors.array()[0],
+        });
+    }
+    const {pincode} = req.body;
+    try{
+        logger.debug('Trying to fetch details via India Post API for pincode : '+pincode);
+        const requiredData = await exports.IndiaPost(pincode);
+        logger.debug('Fetched details successfully');
+        
+        logger.debug('For pincode : '+pincode+" state = "+requiredData.state+" city = "+requiredData.city);
+        return res.status(200).json({
+            success:true,
+            message:'Fetched data',
+            data : requiredData,
+        });
+    }catch(e){
+        logger.debug('Error inside pincodeVerificationAndLocationDetails method !!!');
+        logger.debug(e.stack);
+        return res.status(400).json({
+            success:false,
+            message:'Error while fetching Pincode details',
+        });
+    }
+};
+exports.IndiaPost = async(pincode)=>{
+    let resp;
+    let requiredData;
+    try{
+        const req = await fetch(`https://api.postalpincode.in/pincode/${pincode}`,{
+            method:'GET',
+            headers:{ 'Content-Type': 'application/json' },
+        });
+        resp = await req.json();
+        requiredData = {
+            state : resp[0]["PostOffice"][0].State,
+            city :  resp[0]["PostOffice"][0].District,
+        };
+    }catch(err){
+        throw new Error(err);
+    }
+    return requiredData;
 }

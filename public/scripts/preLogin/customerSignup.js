@@ -99,8 +99,12 @@ customerSignUpSubmitBtn.addEventListener('click',async()=>{
         signal: AbortSignal.timeout(5000),
     });
     const response = await request.json();
-    console.log(response);
     if(response.success){
+        customerName.value = '';
+        emailIdToVerify.value = '';
+        customerPassword.value = '';
+        customerMobileNumber.value = '';
+        customerRePassword.value = '';
         const timer = setTimeout(()=>{
             window.location.href = url+'login';
             clearTimeout(timer);

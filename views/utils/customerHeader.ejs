@@ -7,16 +7,19 @@
         <div class="navigationItemsWrapper">
             <% if (isLoggedIn) { %>
                 <!-- show this if user is logged in as per page -->
-             
+                
             <% }else{%>
-                <!-- show this if user is not lpgged in as per page -->
+                <!-- show this if user is not logged in as per page -->
                 <% if (page=='customerHomePage') { %>
                     <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
                     <div class="navItem"><button class="signup button-3 montserrat" onclick="window.location.href = url+'signup/customer'">Signup</button></div>
                 <% }else if(page=='loginPage'){%>
-                    <div class="navitem homeNavItem footer-nav-item" onclick="window.location.href=url">Home</div>
+                    <div class="navitem homeNavItem montserrat footer-nav-item" onclick="window.location.href=url">Home</div>
                     <div class="navItem"><button class="signup button-3 montserrat" onclick="window.location.href = url+'signup/customer'">Signup</button></div>
                 <%}else if(page=="customerSignUpPage"){%>
+                    <div class="navitem homeNavItem montserrat footer-nav-item" onclick="window.location.href=url">Home</div>
+                    <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
+                <%}else if(page == 'sellerSignupPage'){%>
                     <div class="navitem homeNavItem montserrat footer-nav-item" onclick="window.location.href=url">Home</div>
                     <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
                 <%}%>

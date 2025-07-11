@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const dbNames = require('../DB_Utils/DBNames');
+const auditCols = require('./utilities/auditColumns');
 const loginCredentailDB = new Schema({
     emailId:{
         type:String,
@@ -9,6 +10,9 @@ const loginCredentailDB = new Schema({
     password:{
         type:String,
         required:true,
+    },
+    mobileNo : {
+        type:String
     },
     roleId:{
         type:Number,
@@ -21,7 +25,8 @@ const loginCredentailDB = new Schema({
     entityModel:{
         type:String,
         enum:[dbNames.userRegistrationDB,dbNames.sellerRegistrationDB,dbNames.adminRegistrationDB],
-    }
+    },
+    audit : auditCols
 });
 loginCredentailDB.index({emailId:1});
 module.exports = mongoose.model(dbNames.loginInfoDB,loginCredentailDB,dbNames.loginInfoDB);

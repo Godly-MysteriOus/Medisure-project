@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const dbNames = require('../DB_Utils/DBNames');
 const medicineInfo = require('./utilities/MedicineInfo');
 const addressInfo = require('./utilities/AddressInfo');
+const auditCols = require('./utilities/auditColumns');
 const customer = new Schema({
     customerName:{
         type:String,
@@ -14,7 +15,8 @@ const customer = new Schema({
         required:true,
     },
     mobileNumber:{
-        type:Number,
+        type:Schema.Types.ObjectId,
+        ref : dbNames.loginInfoDB,
         required:true,
     },
     password:{
@@ -30,18 +32,7 @@ const customer = new Schema({
     },
     resetToken:{type:String},
     resetTokenExpiration:{type:Date},
-    createdAt:{
-        type:Date,
-        required:true,
-    },
-    updatedAt:{
-        type:Date,
-    },
-    isDeleted:{
-        type:Boolean,
-        required:true,
-        default:false,
-    }
+    audit : auditCols,
 });
 
 module.exports = mongoose.model(dbNames.userRegistrationDB,customer,dbNames.userRegistrationDB);

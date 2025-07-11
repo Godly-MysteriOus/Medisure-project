@@ -15,7 +15,7 @@ app.set('views', 'views');
 app.set('trust proxy', 1);
 // Setting up CORS policies
 app.use(cors({
-    origin: '*', // Replace with your front-end URL
+    origin: config.hostURI, // Replace with your front-end URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true // Allow cookies if necessary
 }));
@@ -101,5 +101,6 @@ app.use((req,res,next)=>{
 connection.DBConnection(app,process.env.PORT|| 2100);
 app.use((err,req,res,next)=>{
     logger.error(err.message);
+    logger.error(err.stack);
     res.status(404).render('404Page');
 });

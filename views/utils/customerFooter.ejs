@@ -3,14 +3,14 @@
 </div>
 
 <script>
-    function rediectTo(target){
+    function redirectTo(target){
         window.location.href = url+target
     }
     const customerFooterWrapper = document.querySelector('.customerFooterWrapper');
     const map = [['home.png','Home',''],['cart.png','Cart','cart'],['orders.png','Orders','orders'],['profile.png','Profile','profile'],['help.png','Help','help']];
     customerFooterWrapper.innerHTML = '';
     map.forEach(item=>{
-        const html = `<div class="itemWrapper" onclick="rediectTo('${item[2]}')">
+        const html = `<div class="itemWrapper" onclick="redirectTo('${item[2]}')">
             <div class="imageWrapper"><img src="/images/${item[0]}" alt=""></div>
             <div class="textWrapper montserrat">${item[1]}</div>
         </div>`;

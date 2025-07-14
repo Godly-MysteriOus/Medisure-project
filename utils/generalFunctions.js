@@ -5,15 +5,11 @@ const logger = require('../utils/Logger/logger')(filePathRelativeToRoot);
 
 exports.IndianStandardTime = (extendedTime)=>{
     logger.info('Inside IndianStandardTime method!!!');
-    logger.debug('Requested Extended time :'+extendedTime);
-    let nowUTC = new Date();
-    nowUTC = new Date(nowUTC.getTime()+extendedTime);
+    const nowUTC = new Date(new Date()+extendedTime);
     let nowIST;
-    if(nowUTC.toString().includes('India Standard Time')){
-        logger.debug('Current Time is already in IST Format');
+    if(nowUTC.toString().includes('Indian Standard Time')){
         nowIST = nowUTC;
     }else{
-        logger.debug('Converting current time to UTC');
         nowIST = new Date(nowUTC.getTime()+(5.5*60*60*1000)+(extendedTime));
     }
     logger.debug('Returning date time :'+nowIST);

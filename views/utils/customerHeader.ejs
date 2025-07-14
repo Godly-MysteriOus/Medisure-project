@@ -11,19 +11,17 @@
             <% }else{%>
                 <!-- show this if user is not logged in as per page -->
                 <% if (page=='customerHomePage') { %>
-                    <div class="navItem"><button class="loginBtn button-3 montserrat" onclick="window.location.href = url+'login'">Login</button></div>
+                    <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
                     <div class="navItem"><button class="signup button-3 montserrat" onclick="window.location.href = url+'signup/customer'">Signup</button></div>
                 <% }else if(page=='loginPage'){%>
                     <div class="navitem homeNavItem montserrat footer-nav-item" onclick="window.location.href=url">Home</div>
                     <div class="navItem"><button class="signup button-3 montserrat" onclick="window.location.href = url+'signup/customer'">Signup</button></div>
                 <%}else if(page=="customerSignUpPage"){%>
                     <div class="navitem homeNavItem montserrat footer-nav-item" onclick="window.location.href=url">Home</div>
-                    <div class="navItem"><button class="loginBtn button-3 montserrat" onclick="window.location.href = url+'login'">Login</button></div>
-                    <div class="navItem"><button class="loginBtn button-3 montserrat" onclick="window.location.href = url+'signup/seller'">Signup as Seller</button></div>
+                    <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
                 <%}else if(page == 'sellerSignupPage'){%>
                     <div class="navitem homeNavItem montserrat footer-nav-item" onclick="window.location.href=url">Home</div>
-                    <div class="navItem"><button class="loginBtn button-3 montserrat" onclick="window.location.href = url+'login'">Login</button></div>
-                    <div class="navItem"><button class="loginBtn button-3 montserrat" onclick="window.location.href = url+'signup/customer'">Singup as Customer</button></div>
+                    <div class="navItem"><button class="loginBtn button-3 montserrat">Login</button></div>
                 <%}%>
                 <div class="navItem"><button class="contactUsBtn button-3 montserrat">Contact Us</button></div>
             <%}%>

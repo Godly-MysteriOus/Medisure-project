@@ -65,7 +65,7 @@ exports.addCustomer = async(req,res,next)=>{
             throw new Error('Please Verify Email Id');
         }
         logger.debug('Checking whether user exists with emailId :'+customerEmailId);
-        const isExistingUser = await loginInfoDB.findOne({emailId:customerEmailId});
+        const isExistingUser = await loginInfoDB.findOne({emailId:customerEmailId,roleId:1});
         if(isExistingUser){
             logger.debug('User Already Exists with given emailId : '+customerEmailId);
             resultArr.push('User Already Exists, Please Login');
@@ -109,7 +109,7 @@ exports.addCustomer = async(req,res,next)=>{
         delete req.session.isEmailVerified;
         logger.debug('Cleared session items successfully !!!');
         await loginDetail.save();
-        logger.debug('User Created successfully with emailId : '+customerEmailId+" at time : "+userDetail.createdAt);
+        logger.debug('User Created successfully with emailId : '+customerEmailId+" at time : "+userDetail.audit.createTime);
         await transactionSession.commitTransaction();
         res.status(200).json({
             success:true,

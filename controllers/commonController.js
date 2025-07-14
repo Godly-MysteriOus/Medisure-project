@@ -169,9 +169,8 @@ exports.emailOTPVerification = async(req,res,next)=>{
     const result = new Result();
     const {otp} = req.body;
     try{
-        const nowDate = new Date();
         logger.debug('Checking whether OTP is expired or not');
-        if(req.session?.OTPExpirationTime > nowDate){
+        if(req.session?.OTPExpirationTime > generalFunctions.IndianStandardTime(0)){
             logger.debug('OTP didn\'t crossed expiration time');
             if(req.session?.OTP == otp){
                 delete req.session.OTP;

@@ -4,9 +4,11 @@ const path = require('path');
 const projectRoot = path.resolve(__dirname, '../');
 const filePathRelativeToRoot = path.relative(projectRoot, __filename);
 const logger = require('../utils/Logger/logger')(filePathRelativeToRoot);
+const ejs= require('ejs');
 const newsLetterDB = require('../models/newsLetter');
 const userQueriesDB = require('../models/userQueries');
 const mailService = require('../utils/mailService/mail');
+const emailTemplateDB = require('../models/emailTemplates');
 const mongoose = require('mongoose');
 const Result = require('../classes/result');
 const generalFunctions = require('../utils/generalFunctions');
@@ -141,7 +143,9 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
         req.session.isEmailVerified = false;
        await saveSession(req.session);
        logger.debug('OTP generated and stored into session successfully');
-       const mailResult = await mailService.sendMail(emailId,Number(OTP));
+       const emailTemplate = await emailTemplateDB.findOne({templateId:1});
+       const html = ejs.render(emailTemplate.htmlContent,{otp:Number(OTP),time:'5 minutes only'});
+       const mailResult = await mailService.sendMail(emailId,emailTemplate,html);
        if(mailResult){
             logger.debug('Mail Send Successfully');
            return res.status(200).json({

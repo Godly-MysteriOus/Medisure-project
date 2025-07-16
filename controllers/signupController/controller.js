@@ -13,7 +13,6 @@ const {ObjectId} = require('mongodb');
 const DB_Names = require('../../DB_Utils/DBNames');
 const generalFunctions = require('../../utils/generalFunctions');
 const fileUpload = require('../../utils/FileUploads/fileUpload');
-const config = require('../../config');
 const {cloudinary} = require('../../utils/FileUploads/cloudinary');
 const commonController = require('../commonController');
 /**

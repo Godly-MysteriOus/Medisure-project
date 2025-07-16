@@ -27,25 +27,25 @@ regenerateOTPBtn.addEventListener('click',async(e)=>{
     const response = await request.json();
     if(request.status==429){
         window.location.href = url+response.redirectTo;
-    }else{
-        messageDisplayAndHide(response.message);
-    }
-    let time = 120;
-    const interval = setInterval(()=>{
-        if(time==0){
-            regenerateOTPBtn.textContent = `Regenerate OTP`;
-            regenerateOTPBtn.removeAttribute('disabled');
-            clearInterval(interval);
-        }else{
-            if(time/60>=1){
-                regenerateOTPBtn.textContent = `Retry in ${Math.floor(time/60)}m ${time%60}s`;
+    }else if(response.success){
+        let time = 120;
+        const interval = setInterval(()=>{
+            if(time==0){
+                regenerateOTPBtn.textContent = `Regenerate OTP`;
+                regenerateOTPBtn.removeAttribute('disabled');
+                clearInterval(interval);
             }else{
-                regenerateOTPBtn.textContent = `Retry in ${time%60}s`;
+                if(time/60>=1){
+                    regenerateOTPBtn.textContent = `Retry in ${Math.floor(time/60)}m ${time%60}s`;
+                }else{
+                    regenerateOTPBtn.textContent = `Retry in ${time%60}s`;
+                }
+                regenerateOTPBtn.setAttribute('disabled',true);
             }
-            regenerateOTPBtn.setAttribute('disabled',true);
-        }
-        time--;   
-    },1000)
+            time--;   
+        },1000)
+    }
+    messageDisplayAndHide(response.message);
 });
 crossBtn.addEventListener('click',()=>{
     emailOTPInput.value = '';

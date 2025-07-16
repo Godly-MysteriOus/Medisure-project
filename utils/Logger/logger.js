@@ -13,14 +13,14 @@ if (!fs.existsSync(logDir)) {
 const date = new Date().toISOString().split('T')[0];
 const logFilePath = path.join(logDir, `app-${date}.log`);
 
-fs.writeFileSync(logFilePath, "");
+// fs.writeFileSync(logFilePath, "");
 
 // Logger Configuration
 const logger= (fileName) => createLogger({
     level: "silly",
     format: format.combine(
         format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-        format.printf(({ timestamp, level, message }) => `${level.toUpperCase()}: In ${fileName} : ${timestamp} -- ${message}`)
+        format.printf(({ timestamp, level, message }) => `${String(level.toUpperCase()).padEnd(6,' ')}: In ${String(fileName).padEnd(35,' ')} : ${timestamp} -- ${message}`)
     ),
     transports: [
         new transports.Console({ format: format.combine(format.colorize()) }),
@@ -30,7 +30,7 @@ const logger= (fileName) => createLogger({
             filename: path.join(logDir, "app-%DATE%.log"),
             datePattern: "YYYY-MM-DD",
             maxSize: "15m", // Rotate when file size > 15MB
-            maxFiles: "3d", // Keep logs for 3 days
+            maxFiles: 5,
             zippedArchive: true, // Compress old logs
         }),
     ],

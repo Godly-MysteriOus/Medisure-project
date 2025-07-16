@@ -6,6 +6,7 @@ const DB_Names = {
     newsLetterDB : 'news_letter_subscription_db',
     adminRegistrationDB : 'admin_info',
     centralMedicineDB:'medicine_db',
+    emailTemplatesDB :'email_template_db',
 };
 
 module.exports = DB_Names;

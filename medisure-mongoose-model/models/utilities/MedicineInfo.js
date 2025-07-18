@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const dbNames = require('../../DB_Utils/DBNames');
+const dbNames = require('../../DBNames');
 
 const medicineInfo = {
     productId:{

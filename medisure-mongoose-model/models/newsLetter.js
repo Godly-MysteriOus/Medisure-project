@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const DB_Name = require('../DB_Utils/DBNames');
+const DB_Name = require('../DBNames');
 const newsLetter = new Schema({
     emailId:{
         type:'String',

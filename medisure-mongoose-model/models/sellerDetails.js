@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const DBNames = require('../DB_Utils/DBNames');
+const DBNames = require('../DBNames');
 const addressStructure = require('./utilities/AddressInfo');
 const auditCols = require('./utilities/auditColumns');
 const schedule = {

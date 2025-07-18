@@ -5,13 +5,11 @@ const projectRoot = path.resolve(__dirname, '../');
 const filePathRelativeToRoot = path.relative(projectRoot, __filename);
 const logger = require('../utils/Logger/logger')(filePathRelativeToRoot);
 const ejs= require('ejs');
-const newsLetterDB = require('../models/newsLetter');
-const userQueriesDB = require('../models/userQueries');
 const mailService = require('../utils/mailService/mail');
-const emailTemplateDB = require('../models/emailTemplates');
 const mongoose = require('mongoose');
 const Result = require('../classes/result');
 const generalFunctions = require('../utils/generalFunctions');
+const {newsLetterDB,userQueriesDB,emailTemplatesDB} = require('medisure-mongoose-model');
 
 exports.postSubscriptionToNewsLetter = async(req,res,next)=>{ 
     const result = new Result();
@@ -81,7 +79,7 @@ exports.postUserQueries = async(req,res,next)=>{
     const transactionSession = await mongoose.startSession();
     try{
         transactionSession.startTransaction();
-        const isSaved = userQueriesDB.create([{emailId:emailId,mobileNo:mobileNo,message:message,raisedTime:generalFunctions.IndianStandardTime(0),status:'NEW'}],{session:transactionSession});
+        const isSaved = await userQueriesDB.create([{emailId:emailId,mobileNo:mobileNo,message:message,raisedTime:generalFunctions.IndianStandardTime(0),status:'NEW'}],{session:transactionSession});
         if(!isSaved){
             logger.debug('Raising Request Failed, error saving data into the database');
             throw new Error('Raising Request Failed');
@@ -143,7 +141,7 @@ exports.postEmailOTPGeneration = async(req,res,next)=>{
         req.session.isEmailVerified = false;
        await saveSession(req.session);
        logger.debug('OTP generated and stored into session successfully');
-       const emailTemplate = await emailTemplateDB.findOne({templateId:1});
+       const emailTemplate = await emailTemplatesDB.findOne({templateId:1});
        const html = ejs.render(emailTemplate.htmlContent,{otp:Number(OTP),time:'5 minutes only'});
        const mailResult = await mailService.sendMail(emailId,emailTemplate,html);
        if(mailResult){

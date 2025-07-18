@@ -4,13 +4,11 @@ const filePathRelativeToRoot = path.relative(projectRoot, __filename);
 const logger = require('../../utils/Logger/logger')(filePathRelativeToRoot);
 const {validationResult} = require('express-validator');
 const mongoose = require('mongoose');
-const loginInfoDB = require('../../models/loginDetails');
-const customerInfoDB = require('../../models/customerDetails');
-const sellerInfoDB = require('../../models/sellerDetails');
+const {loginInfoDB,userRegistrationDB,sellerRegistrationDB} = require('medisure-mongoose-model');
 const bcrypt = require('bcrypt');
 const Result = require('../../classes/result');
 const {ObjectId} = require('mongodb');
-const DB_Names = require('../../DB_Utils/DBNames');
+const DB_Names = require('../../medisure-mongoose-model/DBNames');
 const generalFunctions = require('../../utils/generalFunctions');
 const fileUpload = require('../../utils/FileUploads/fileUpload');
 const {cloudinary} = require('../../utils/FileUploads/cloudinary');
@@ -93,7 +91,7 @@ exports.addCustomer = async(req,res,next)=>{
         }
         logger.debug('Entry made into login_info DB Successfully !!!');
         
-        let userDetail = await customerInfoDB.create([{customerName:customerName,emailId:new ObjectId(loginDetail._id),mobileNumber:new Object(loginDetail._id),password:new ObjectId(loginDetail._id),cart:{items:[],totalPrice:0},audit:auditCol}],{session:transactionSession});
+        let userDetail = await userRegistrationDB.create([{customerName:customerName,emailId:new ObjectId(loginDetail._id),mobileNumber:new Object(loginDetail._id),password:new ObjectId(loginDetail._id),cart:{items:[],totalPrice:0},audit:auditCol}],{session:transactionSession});
         userDetail = userDetail.pop();
         logger.debug('Entry made into customer_info DB Successfully');
         if(!userDetail){
@@ -262,7 +260,7 @@ exports.addSeller = async(req,res,next)=>{
         //     logger.debug('Seller Didn\'t provided location coordinates. Locate your Store Button Not Clicked');
         //     throw new Error('Please Locate your store');
         // }
-        const isSellerAlreadyPresent = await sellerInfoDB.findOne({'storeRegistrationDetails.drugLicenseNumber': drugLicenseNumber,'storeRegistrationDetails.gstNumber':gstNumber,'storeRegistrationDetails.fssaiNumber':fssaiNumber,'audit.isDeleted':false});
+        const isSellerAlreadyPresent = await sellerRegistrationDB.findOne({'storeRegistrationDetails.drugLicenseNumber': drugLicenseNumber,'storeRegistrationDetails.gstNumber':gstNumber,'storeRegistrationDetails.fssaiNumber':fssaiNumber,'audit.isDeleted':false});
 
         if(isSellerAlreadyPresent){
             logger.debug(`Found a seller object with drugLicenseNumber : ${drugLicenseNumber} and GST Registration Number : ${gstNumber} and FSSAI Number : ${fssaiNumber}`);
@@ -292,7 +290,7 @@ exports.addSeller = async(req,res,next)=>{
         }
         logger.debug('Saved Entry into the login_info db');
         const sellerObj = await setSellerObject(sellerName,loginInfo,storePincode,storeAddress,locationCoords,storeName,drugLicenseNumber,gstNumber,fssaiNumber);
-        let userRegistration = await sellerInfoDB.create([{sellerDetails:sellerObj[0],storeDetails:sellerObj[1],storeRegistrationDetails:sellerObj[2],resetToken:null,resetTokenExpirationType:null,audit:auditCol}],{session:transactionSession});
+        let userRegistration = await sellerRegistrationDB.create([{sellerDetails:sellerObj[0],storeDetails:sellerObj[1],storeRegistrationDetails:sellerObj[2],resetToken:null,resetTokenExpirationType:null,audit:auditCol}],{session:transactionSession});
         logger.debug('Saved Entry in seller_db');
         if(userRegistration==null || userRegistration[0] == []){
             logger.error('Error saving entry in store_db');

@@ -10,8 +10,8 @@ if (!fs.existsSync(logDir)) {
 }
 
 // Truncate (clear) log file on restart
-const date = new Date().toISOString().split('T')[0];
-const logFilePath = path.join(logDir, `app-${date}.log`);
+// const date = new Date().toISOString().split('T')[0];
+// const logFilePath = path.join(logDir, `app-${date}.log`);
 
 // fs.writeFileSync(logFilePath, "");
 

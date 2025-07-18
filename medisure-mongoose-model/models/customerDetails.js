@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const dbNames = require('../DB_Utils/DBNames');
+const dbNames = require('../DBNames');
 const medicineInfo = require('./utilities/MedicineInfo');
 const addressInfo = require('./utilities/AddressInfo');
 const auditCols = require('./utilities/auditColumns');

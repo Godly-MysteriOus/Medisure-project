@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const DB_Names= require('../DB_Utils/DBNames');
+const DB_Names= require('../DBNames');
 
 const UserQueriesDB = new Schema({
     emailId : {type:String,required:true},

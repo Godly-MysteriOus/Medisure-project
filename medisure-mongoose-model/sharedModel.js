@@ -5,4 +5,8 @@ module.exports = {
     userQueriesDB : require('./models/userQueries'),
     newsLetterDB : require('./models/newsLetter'),
     emailTemplatesDB : require('./models/emailTemplates'),
+    testCronDB : require('./models/testCron'),
+    addressInfoComp : require('./models/utilities/AddressInfo'),
+    auditColComp : require('./models/utilities/auditColumns'),
+    medicineInfoComp : require('./models/utilities/MedicineInfo'),
 }

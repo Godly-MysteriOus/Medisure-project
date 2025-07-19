@@ -1,6 +1,6 @@
 {
   "name": "medisure-mongoose-model",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "models for medisure-ui and medisure-agent projects",
   "main": "sharedModel.js",
   "scripts": {

@@ -7,6 +7,7 @@ const DB_Names = {
     adminRegistrationDB : 'admin_info',
     centralMedicineDB:'medicine_db',
     emailTemplatesDB :'email_template_db',
+    testCronDB : 'update_agent_db',
 };
 
 module.exports = DB_Names;

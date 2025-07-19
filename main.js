@@ -15,7 +15,7 @@ app.set('views', 'views');
 app.set('trust proxy', 1);
 // Setting up CORS policies
 app.use(cors({
-    origin: config.hostURI, // Replace with your front-end URL
+    origin: [config.hostURI,config.medisureAgentURI], // Replace with your front-end URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true // Allow cookies if necessary
 }));
@@ -87,10 +87,12 @@ const loginLogoutRoute = require('./routes/signupRoute');
 // const customerRoute = require('./routes/customerRoute');
 const commonRoute = require('./routes/commonRoute');
 const generalRoute = require('./routes/generalRoute');
+const agentRoute = require('./routes/agentRoute');
 // app.use('/customer',customerRoute);
 // app.use('/seller',sellerRoute);
 app.use('/signup',loginLogoutRoute);
 app.use('/common',commonRoute);
+app.use('/agent',agentRoute);
 app.use(generalRoute);
 
 // general routes
